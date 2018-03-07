@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
       <h3>User List</h3>
 
       
@@ -13,7 +13,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.main {
+  margin-top: 50px;
+}
 </style>
 
