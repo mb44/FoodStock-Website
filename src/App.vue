@@ -26,11 +26,13 @@ import Home from './components/Home.vue'
 import ListContainers from './components/ListContainers.vue'
 import ListFoodTypes from './components/ListFoodTypes.vue'
 import ListUsers from './components/ListUsers.vue'
+import EditContainer from './components/EditContainer.vue'
+import DeleteContainer from './components/DeleteContainer.vue'
 
 export default {
   data() {
     return {
-      currentView: 'fmLogin'
+      currentView: 'fmDeleteContainer'
     }
   },
   components: {
@@ -39,6 +41,8 @@ export default {
     fmHome: Home,
     fmLogin: Login,
     fmListContainers: ListContainers,
+    fmEditContainer: EditContainer,
+    fmDeleteContainer: DeleteContainer,
     fmListFoodTypes: ListFoodTypes,
     fmListUsers: ListUsers
   }
