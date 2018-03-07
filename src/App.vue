@@ -8,8 +8,8 @@
         <fm-home></fm-home>
       </div>
       <div class="row">
-      <fm-footer></fm-footer>
-    </div>
+        <fm-footer></fm-footer>
+      </div>
     </div>
   </div>
 </template>
