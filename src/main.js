@@ -15,6 +15,7 @@ const routes = [
   { path: "/ListContainers", component: ListContainers },
   { path: "/ListFoodTypes", component: ListFoodTypes },
   { path: "/ListUsers", component: ListUsers },
+  { path: "*", redirect: "/" }
 ]
 
 // Setup Vue router instance
