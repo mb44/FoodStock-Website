@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
 import ListContainers from './components/ListContainers.vue'
 import ListFoodTypes from './components/ListFoodTypes.vue'
 import ListUsers from './components/ListUsers.vue'
+import GenerateShoppingList from './components/GenerateShoppingList'
 
 // Make Vue router globally accessible without the need to import it
 Vue.use(VueRouter)
@@ -15,6 +16,7 @@ const routes = [
   { path: "/ListContainers", component: ListContainers },
   { path: "/ListFoodTypes", component: ListFoodTypes },
   { path: "/ListUsers", component: ListUsers },
+  { path: "/GenerateShoppingList", component: GenerateShoppingList },
   { path: "*", redirect: "/" }
 ]
 
