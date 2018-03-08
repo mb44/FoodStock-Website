@@ -19,7 +19,8 @@ const routes = [
 
 // Setup Vue router instance
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 new Vue({
