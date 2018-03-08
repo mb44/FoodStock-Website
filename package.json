@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "npm": "^5.7.1",
-    "vue": "^2.5.11"
+    "vue": "^2.5.11",
+    "vue-router": "^3.0.1"
   },
   "browserslist": [
     "> 1%",
