@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <fm-header @viewWasChanged="currentView = $event"></fm-header>
+        <fm-header></fm-header>
       </div>
       <div class="row">
         <router-view></router-view>
@@ -28,11 +28,6 @@ import EditContainer from './components/EditContainer.vue'
 import DeleteContainer from './components/DeleteContainer.vue'
 
 export default {
-  data() {
-    return {
-      currentView: 'fmDeleteContainer'
-    }
-  },
   components: {
     fmHeader: Header,
     fmFooter: Footer,
