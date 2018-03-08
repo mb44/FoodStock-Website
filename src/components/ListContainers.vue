@@ -10,7 +10,7 @@
       <th scope="col">Current amount</th>
     </tr>
   </thead>
-  <tbody v-for="container in containers">
+  <tbody v-for="container in containers" :key="container['container.key']">
     <tr>
       <th scope="row">{{ container.id }}</th>
       <td>{{ container.foodName }}</td>
@@ -18,7 +18,7 @@
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-primary">Add</button>
 
   </div>
 </template>
