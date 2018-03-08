@@ -5,9 +5,7 @@
         <fm-header @viewWasChanged="currentView = $event"></fm-header>
       </div>
       <div class="row">
-        <keep-alive>
-          <component v-bind:is="currentView"></component>
-        </keep-alive>        
+        <router-view></router-view>
       </div>
       <!--
       <div class="row">

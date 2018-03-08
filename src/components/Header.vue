@@ -8,10 +8,10 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav mr-auto">
-          <li class="nav-item"><a class="nav-link" href="#" @click="viewSelected='fmHome'" >Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" @click="viewSelected='fmListContainers'">Container Management</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" @click="viewSelected='fmListFoodTypes'">Food Type Management</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" @click="viewSelected='fmListUsers'">User Management</a></li>
+          <router-link to="/"><a class="nav-link">Home</a></router-link>
+          <router-link to="/listcontainers"><a class="nav-link">Container Management</a></router-link>
+          <router-link to="/listfoodtypes"><a class="nav-link">Food Type Management</a></router-link>
+          <router-link to="/listusers"><a class="nav-link">User Management</a></router-link>
         </ul>
       </div>
     </nav>
