@@ -1,4 +1,8 @@
 <template>
+
+<div>
+  <h3 class="main">Login</h3>   
+
   <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
@@ -8,8 +12,10 @@
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  </form>
+</div>
 </template>
 
 <script>
@@ -19,9 +25,11 @@ export default {
 </script>
 
 <style scoped>
-    form {
+    .main {
         margin-top: 50px;
     }
+    form {
+      margin-top: 20px;
+    }
 </style>
-
 
