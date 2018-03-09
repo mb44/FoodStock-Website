@@ -2,7 +2,7 @@
   <div class="main">
       <h3>Container List</h3>
 
-      <table class="table table-hover">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     getContainerItems() {
-      return this.$store.getters.getContainerItems
+      return this.$store.getters.getContainers
     }
   } 
 }
