@@ -10,4 +10,4 @@ import Firebase from 'firebase'
   };
   const firebaseApp = Firebase.initializeApp(config);
   const db = firebaseApp.database();
-  export const containerRef = db.containerRef('/containers')
+  export const dbContainersRef = db.ref('containeritems')
