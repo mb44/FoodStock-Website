@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { store }from './store/store.js'
 import App from './App.vue'
 
 import Login from './components/Login'
@@ -35,5 +36,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router, // Inject the router into this Vue instance
+  store,
   render: h => h(App)
 })
