@@ -27,6 +27,8 @@ import ListUsers from './components/ListUsers.vue'
 import EditContainer from './components/EditContainer.vue'
 import DeleteContainer from './components/DeleteContainer.vue'
 import { dbContainersRef } from './firebaseConfig.js'
+import { dbFoodTypesRef } from './firebaseConfig.js'
+import { dbUsersRef } from './firebaseConfig.js'
 
 export default {
   components: {
@@ -42,6 +44,8 @@ export default {
   },
   created() {
     this.$store.dispatch('setContainersRef', dbContainersRef)
+    this.$store.dispatch('setFoodsRef', dbFoodTypesRef)
+    this.$store.dispatch('setUsersRef', dbUsersRef)
   }
 }
 </script>
