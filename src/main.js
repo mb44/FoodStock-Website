@@ -28,7 +28,7 @@ const routes = [
   { path: "/EditContainer/:containerid", component: EditContainer },
   { path: "/ListFoodTypes", component: ListFoodTypes },
   { path: "/AddFoodType", component: AddFoodType },
-  { path: "/EditFoodType/:foodid", component: EditFoodType },
+  { path: "/EditFoodType/:foodtypeid", component: EditFoodType },
   { path: "/ListUsers", component: ListUsers },
   { path: "/AddUser", component: AddUser },
   { path: "/EditUser/:userid", component: EditUser },
