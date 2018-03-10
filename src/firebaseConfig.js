@@ -10,4 +10,7 @@ import Firebase from 'firebase'
   };
   const firebaseApp = Firebase.initializeApp(config);
   const db = firebaseApp.database();
-  export const dbContainersRef = db.ref('containeritems')
+
+  export const dbContainersRef = db.ref('containers')
+  export const dbFoodTypesRef = db.ref('foodtypes')
+  export const dbUsersRef = db.ref('users')
