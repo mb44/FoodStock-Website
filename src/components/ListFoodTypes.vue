@@ -2,17 +2,18 @@
   <div class="main">
       <h3>Food Type List</h3>
  
+ {{ getFoodItems }}
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">id</th>
-            <th scope="col">Food name</th>
+            <td scope="col">id</td>
+            <td scope="col">Food name</td>
           </tr>
         </thead>
-        <tbody v-for="food in getFoodItems" :key="food['container.key']">
-          <tr>
-            <td scope="row">{{ food.id }}</td>
-            <td>{{food.name }}</td>
+        <tbody v-for="foodtype in getFoodItems" :key="foodtype['.key']">
+          <tr @click="editFoodType(foodtype['.key'])">
+            <td scope="row">{{ foodtype['.key']}}</td>
+            <td>{{ foodtype.name }}</td>
           </tr>
 
         </tbody>
@@ -25,11 +26,18 @@
 
 <script>
 export default {
+  data: function() {
+    return {
+      editFoodType: function(foodtypeid) {
+        this.$router.push({ path: `/EditFoodType/${foodtypeid}` })
+      }
+    }
+  },
   computed: {
     getFoodItems() {
       return this.$store.getters.getFoods
     }
-  } 
+  }
 }
 </script>
 
