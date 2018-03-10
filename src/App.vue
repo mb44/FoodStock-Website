@@ -5,6 +5,9 @@
         <fm-header></fm-header>
       </div>
       <div class="row">
+        <fm-auth-status></fm-auth-status>
+      </div>
+      <div class="row">
         <router-view></router-view>
       </div>
       <!--
@@ -20,12 +23,15 @@
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Login from './components/Login.vue'
+import AuthStatus from './components/AuthStatus.vue'
 import Home from './components/Home.vue'
 import ListContainers from './components/ListContainers.vue'
 import ListFoodTypes from './components/ListFoodTypes.vue'
 import ListUsers from './components/ListUsers.vue'
 import EditContainer from './components/EditContainer.vue'
 import DeleteContainer from './components/DeleteContainer.vue'
+
+
 import { dbContainersRef } from './firebaseConfig.js'
 import { dbFoodTypesRef } from './firebaseConfig.js'
 import { dbUsersRef } from './firebaseConfig.js'
@@ -36,6 +42,7 @@ export default {
     fmFooter: Footer,
     fmHome: Home,
     fmLogin: Login,
+    fmAuthStatus: AuthStatus,
     fmListContainers: ListContainers,
     fmEditContainer: EditContainer,
     fmDeleteContainer: DeleteContainer,
