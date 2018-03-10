@@ -40,7 +40,7 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Container Weight:</th><td>{{ currentContainer.currentAmount }}kg</th><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Container Weight:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
                 <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
