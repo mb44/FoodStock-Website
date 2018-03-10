@@ -1,6 +1,8 @@
 <template>
   <div class="main">
     <h3>Edit Food type</h3>
+
+    <button class="btn btn-danger" @click="deleteFoodType">Delete</button>
     <table class="table">
         <thead>
           <tr>
@@ -11,19 +13,35 @@
         <tbody>
           <tr>
             <td>{{ currentFoodType['.key'] }}</td>
-            <td><input type="text" :value="currentFoodType.name"></td>            
+            <td><input type="text" :value="currentFoodType.name" id="NameInput"></td>            
           </tr>
 
         </tbody>
       </table>
+    <router-link to="/ListFoodTypes" tag="button" class="btn">Cancel</router-link>
+    <button class="btn btn-primary" @click.prevent="updateFoodType">Submit</button>
+
   </div>
 </template>
 
 <script>
+import { dbFoodTypesRef } from '../firebaseConfig.js'
+
 export default {
   data: function() {
     return {
-      currentFoodType: null
+      currentFoodType: null,
+      newName: ""
+    }
+  },
+  methods: {
+    updateFoodType: function() {
+      var newName = document.getElementById("NameInput").value
+      dbFoodTypesRef.child(this.currentFoodType['.key']).child("name").set(newName)
+    },
+    deleteFoodType: function() {
+      dbFoodTypesRef.child(this.currentFoodType['.key']).remove()
+      this.$router.go(-1)
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -32,7 +50,7 @@ export default {
 
       // Find the item
       var items = foods.filter(function (obj) { 
-        return obj['.key'] == vm.$route.params.foodtypeid;
+          return obj['.key'] == vm.$route.params.foodtypeid;
       });
       
       if (items.length > 0) {
@@ -48,6 +66,9 @@ export default {
 <style scoped>
 .main {
   margin-top: 50px;
+}
+table {
+  margin-top: 20px;
 }
 </style>
 
