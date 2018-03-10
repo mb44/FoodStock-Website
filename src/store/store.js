@@ -8,13 +8,21 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        containerItems: [],
-        foodItems: [],
-        userItems: []
+        containerItems: [], // Array of container items
+        foodItems: [],      // Array of food types
+        userItems: [],      // Array of users    
+        currentUser: null   // Type object. Initially, the user is not signed in
     },
     mutations: {
-        // mutations (used my firebase to mutate states)
-        ...firebaseMutations
+        // mutations (used by firebase to mutate states)
+        ...firebaseMutations,
+        userStatus(state, user) {
+            if (user) {
+                state.currentUser = user.email
+            } else {
+                state.currentUser = null 
+            }
+        }
     },
     actions: {
         setContainersRef: firebaseAction(({bindFirebaseRef}, ref) => {
@@ -25,11 +33,16 @@ export const store = new Vuex.Store({
         }),
         setUsersRef: firebaseAction(({bindFirebaseRef}, ref) => {
             bindFirebaseRef('userItems', ref)
-        })
+        }),
+        // Log in
+        setUser(context, user) {
+            context.commit('userStatus', user)  
+        }  
     },
     getters: {
         getContainers: state => state.containerItems,
         getFoods: state => state.foodItems,
-        getUsers: state => state.userItems
+        getUsers: state => state.userItems,
+        getCurrentUser: state => state.currentUser
     }
 })
