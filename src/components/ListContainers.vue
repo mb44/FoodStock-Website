@@ -12,7 +12,7 @@
   </thead>
   <tbody v-for="container in getContainerItems" :key="container['container.key']">
     <tr>
-      <th scope="row">{{ container.id }}</th>
+      <td scope="row">{{ container.id }}</td>
       <td>{{ container.foodName }}</td>
       <td><div>{{ container.currentAmount }}kg</div> <progress max="100" value="35"></progress></td>
     </tr>
