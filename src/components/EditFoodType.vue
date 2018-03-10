@@ -40,8 +40,12 @@ export default {
       dbFoodTypesRef.child(this.currentFoodType['.key']).child("name").set(newName)
     },
     deleteFoodType: function() {
-      dbFoodTypesRef.child(this.currentFoodType['.key']).remove()
-      this.$router.go(-1)
+      var res = confirm("Are you sure you want to delete this food type?")
+      
+      if (res)  {
+        dbFoodTypesRef.child(this.currentFoodType['.key']).remove()
+        this.$router.go(-1)
+      }
     }
   },
   beforeRouteEnter (to, from, next) {
