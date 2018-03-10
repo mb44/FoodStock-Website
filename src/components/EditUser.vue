@@ -1,7 +1,7 @@
 <template>
   <div class="main">
       <h3>Edit User</h3>
-
+      {{ $route.params.userid }}
   </div>
 </template>
 
