@@ -11,10 +11,10 @@
     </tr>
   </thead>
   <tbody v-for="container in getContainerItems" :key="container['container.key']">
-    <tr @click="editContainer(container.id)">
+    <tr @click="editContainer(container['.key'])">
       <td scope="row">{{ container['.key'] }}</td>
       <td>{{ container.foodName }}</td>
-      <td><div>{{ container.currentAmount }}kg</div> <progress max="100" value="35"></progress></td>
+      <td><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div> <progress max="100" :value="container.progress"></progress></td>
     </tr>
   </tbody>
 </table>
@@ -26,14 +26,24 @@
 export default {
   data: function() {
     return {
-        editContainer: function(userid) {
-          this.$router.push({ path: `/EditUser/${containerid}` })
+        editContainer: function(containerid) {
+          this.$router.push({ path: `/EditContainer/${containerid}` })
         }
       }
   },
   computed: {
     getContainerItems() {
-      return this.$store.getters.getContainers
+      var containerItems = this.$store.getters.getContainers
+      
+      var res = []
+
+      for (var i=0; i<containerItems.length; i++) {
+        var temp = containerItems[i]
+        temp.progress = containerItems[i].currentAmount*100/containerItems[i].maxCapacity
+        res.push(temp)
+      }
+
+      return res
     }
   } 
 }

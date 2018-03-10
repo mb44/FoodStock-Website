@@ -60,8 +60,6 @@ export default {
       if (items.length > 0) {
         vm.currentFoodType = items[0]
       }
-
-      next()
     })
   }
 }

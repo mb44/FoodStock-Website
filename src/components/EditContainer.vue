@@ -2,49 +2,54 @@
   <div class="main">
       <h3>Edit Container</h3>
 
+    {{ currentContainer }}
     <table class="table table-hover">
         <tbody>
             <tr>
-            <td>Id:</td><td colspan="2">3</td>
+            <td>Id:</td><td colspan="2">{{ currentContainer.id }}</td>
             </tr>
             <tr>
                 <td>Update Frequency:</td>
                 <td>
-                    <select>
+                    <select v-model="currentContainer.updateFrequency">
                         <option value="10">10minutes</option>
                         <option value="30">30minutes</option>
                         <option value="60">60minutes</option>
                         <option value="120">2hours</option>
+                        <option value="240">4hours</option>
                         <option value="360">6hours</option>
                         <option value="720">12hours</option>
                         <option value="1440">24hours</option>
                     </select>
                 </td>
-                <td><button type="button" class="btn btn-primary">Submit</button></td>
+                <td><button type="button" class="btn btn-primary" @click="updateUpdateFrequency">Submit</button></td>
             </tr>
             <tr>
                 <td>Food Type:</td>
                 <td>
-                    <select>
+                    <select v-model="currentContainer.foodName">
+                        <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>
+                        <!--
                         <option value="coffee">Coffee</option>
                         <option value="cashew nuts">Cashew Nuts</option>
                         <option value="sugar">Sugar</option>
                         <option value="eggs">Eggs</option>
+                        -->                                       
                     </select>
                 </td>
-                <td><button type="button" class="btn btn-primary">Submit</button></td>
+                <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <td>Container Weight:</td><td>0.05kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <td>Container Weight:</td><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Max capacity:</td><td>5.0kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <td>Max capacity:</td><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Current Amount:</td><td>2.0kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <td>Current Amount:</td><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Time to Sleep:</td><td colspan="2">Sleeping...</td>
+                <td>Time to Sleep:</td><td colspan="2"><span v-if="currentContainer.timeToSleep==0">Sleeping...</span><span v-else>{{ currentContainer.timeToSleep}}secs</span></td>
             </tr>
         </tbody>
     </table>
@@ -52,8 +57,58 @@
 </template>
 
 <script>
+import { dbContainersRef } from '../firebaseConfig.js'
+import { dbFoodTypesRef } from '../firebaseConfig.js'
+
 export default {
-  
+    data: function() {
+        return {
+            currentContainer: null
+            //newName: ""
+        }
+    },
+    methods: {
+        updateUpdateFrequency: function() {
+            dbContainersRef.child(this.currentContainer['.key']).child("updateFrequency").set(this.currentContainer.updateFrequency)
+        },
+        updateFoodName: function() {
+            dbContainersRef.child(this.currentContainer['.key']).child("foodName").set(this.currentContainer.foodName)
+        }
+    },
+    computed: {
+        getFoodItems() {
+            
+            var foodItems = this.$store.getters.getFoods;
+            var foodNames = []
+
+            console.log(foodItems.length)
+
+
+            for (var i=0; i<foodItems.length; i++) {
+                foodNames.push( { 
+                    text: foodItems[i].name, 
+                    value: foodItems[i].name } 
+                )
+            }
+
+        return foodNames
+        }
+    },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            var containers = vm.$store.getters.getContainers
+
+            // Find the item
+            var items = containers.filter(function (obj) { 
+                return obj['.key'] == vm.$route.params.containerid;
+            });
+            
+            if (items.length > 0) {
+                vm.currentContainer = items[0]
+                
+            }  
+        })
+    }
 }
 </script>
 
