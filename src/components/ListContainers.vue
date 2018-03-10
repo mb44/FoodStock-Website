@@ -11,8 +11,8 @@
     </tr>
   </thead>
   <tbody v-for="container in getContainerItems" :key="container['container.key']">
-    <tr>
-      <td scope="row">{{ container.id }}</td>
+    <tr @click="editContainer(container.id)">
+      <td scope="row">{{ container['.key'] }}</td>
       <td>{{ container.foodName }}</td>
       <td><div>{{ container.currentAmount }}kg</div> <progress max="100" value="35"></progress></td>
     </tr>
@@ -25,7 +25,10 @@
 <script>
 export default {
   data: function() {
-      return {
+    return {
+        editContainer: function(userid) {
+          this.$router.push({ path: `/EditUser/${containerid}` })
+        }
       }
   },
   computed: {
