@@ -12,9 +12,12 @@
           <router-link to="/listfoodtypes" tag="li"><a class="nav-link">Food Type Management</a></router-link>
           <router-link to="/listusers" tag="li"><a class="nav-link">User Management</a></router-link>     
         </ul>
+        <br>
+        <!--
         <div>
           <fm-auth-status></fm-auth-status>
         </div>
+        -->
       </div>
     </nav>
 
@@ -23,10 +26,12 @@
 </template>
 
 <script>
-
+import AuthStatus from './AuthStatus.vue'
 
 export default {
-
+  components: {
+    fmAuthStatus: AuthStatus
+  }
 }
 </script>
 
