@@ -39,8 +39,13 @@ export default {
   },
   methods: {
     signIn() {
-      var email = document.getElementById("InputEmail").value
-      var password = document.getElementById("InputPassword").value
+      var emailInput = document.getElementById("InputEmail")
+      var email = emailInput.value
+      var passwordInput = document.getElementById("InputPassword")
+      var password = passwordInput.value
+
+      emailInput.value = "";
+      passwordInput.value = "";
 
       Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
