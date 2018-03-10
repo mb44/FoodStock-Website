@@ -46,5 +46,8 @@ export default {
 .main {
   margin-top: 50px;
 }
+tr {
+  cursor: pointer;
+}
 </style>
 

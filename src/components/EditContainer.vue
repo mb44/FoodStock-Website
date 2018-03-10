@@ -3,13 +3,13 @@
       <h3>Edit Container</h3>
 
     {{ currentContainer }}
-    <table class="table table-hover">
+    <table class="table">
         <tbody>
             <tr>
-            <td>Id:</td><td colspan="2">{{ currentContainer.id }}</td>
+            <th>Id:</th><td colspan="2">{{ currentContainer.id }}</td>
             </tr>
             <tr>
-                <td>Update Frequency:</td>
+                <th>Update Frequency:</th>
                 <td>
                     <select v-model="currentContainer.updateFrequency">
                         <option value="10">10minutes</option>
@@ -25,7 +25,7 @@
                 <td><button type="button" class="btn btn-primary" @click="updateUpdateFrequency">Submit</button></td>
             </tr>
             <tr>
-                <td>Food Type:</td>
+                <th>Food Type:</th>
                 <td>
                     <select v-model="currentContainer.foodName">
                         <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>
@@ -40,16 +40,16 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <td>Container Weight:</td><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Container Weight:</th><td>{{ currentContainer.currentAmount }}kg</th><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Max capacity:</td><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Current Amount:</td><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Current Amount:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <td>Time to Sleep:</td><td colspan="2"><span v-if="currentContainer.timeToSleep==0">Sleeping...</span><span v-else>{{ currentContainer.timeToSleep}}secs</span></td>
+                <th>Time to Sleep:</th><td colspan="2"><span v-if="currentContainer.timeToSleep==0">Sleeping...</span><span v-else>{{ currentContainer.timeToSleep}}secs</span></td>
             </tr>
         </tbody>
     </table>
@@ -90,7 +90,6 @@ export default {
                     value: foodItems[i].name } 
                 )
             }
-
         return foodNames
         }
     },
