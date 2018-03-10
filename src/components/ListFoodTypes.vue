@@ -1,7 +1,7 @@
 <template>
   <div class="main">
       <h3>Food Type List</h3>
-
+ 
       <table class="table table-hover">
         <thead>
           <tr>
@@ -9,26 +9,12 @@
             <th scope="col">Food name</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-for="food in getFoodItems" :key="food['container.key']">
           <tr>
-            <th scope="row">1</th>
-            <td>Coffee</td>
+            <td scope="row">{{ food.id }}</td>
+            <td>{{food.name }}</td>
           </tr>
 
-          <tr>
-            <th scope="row">2</th>
-            <td>Cashew nuts</td>
-          </tr>
-
-          <tr>
-            <th scope="row">3</th>
-            <td>Sugar</td>
-          </tr>
-
-          <tr>
-            <th scope="row">4</th>
-            <td>Eggs</td>
-          </tr>
         </tbody>
       </table>
 
@@ -39,7 +25,11 @@
 
 <script>
 export default {
-  
+  computed: {
+    getFoodItems() {
+      return this.$store.getters.getFoods
+    }
+  } 
 }
 </script>
 

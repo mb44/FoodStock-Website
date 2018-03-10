@@ -10,30 +10,13 @@
             <th scope="col">Privileges</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Morten</th>
-            <td>mortenbeuchert@gmail.com</td>
-            <th scope="col">Admin</th>            
+        <tbody v-for="user in getUserItems" :key="user['user.key']">
+          <tr @click="editUser(user.userid)">
+            <td scope="row">{{ user.userid }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.privileges }}</td>            
           </tr>
 
-          <tr>
-            <th scope="row">Lars</th>
-            <td>lars@gmail.com</td>
-            <th scope="col">Admin</th>            
-          </tr>
-
-          <tr>
-            <th scope="row">NormalUser1</th>
-            <td>user1@yahoo.com</td>
-            <th scope="col">Staff</th>
-          </tr>
-
-          <tr>
-            <th scope="row">NormalUser1</th>
-            <td>user2@gmail.com</td>
-            <th scope="col">Staff</th>
-          </tr>
         </tbody>
       </table>
 
@@ -44,7 +27,18 @@
 
 <script>
 export default {
-  
+    data: function() {
+      return {
+        editUser: function(userid) {
+          this.$router.push({ path: `/EditUser/${userid}` })
+        }
+      }
+    },
+    computed: {
+    getUserItems() {
+      return this.$store.getters.getUsers
+    }
+  } 
 }
 </script>
 
