@@ -30,8 +30,8 @@ export default {
   },
   methods: {
       addFoodType: function() {
-        alert(this.foodname)
         dbFoodTypesRef.push({ id: 7, name: this.foodname })
+        this.$router.go(-1)
       }
   }
 }
