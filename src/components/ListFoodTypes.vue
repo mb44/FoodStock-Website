@@ -6,8 +6,8 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <td scope="col">id</td>
-            <td scope="col">Food name</td>
+            <th scope="col">id</th>
+            <th scope="col">Food name</th>
           </tr>
         </thead>
         <tbody v-for="foodtype in getFoodItems" :key="foodtype['.key']">
