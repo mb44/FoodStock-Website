@@ -1,8 +1,8 @@
 <template>
   <div class="main">
+     {{ getFoodItems }}
       <h3>Food Type List</h3>
  
- {{ getFoodItems }}
       <table class="table table-hover">
         <thead>
           <tr>

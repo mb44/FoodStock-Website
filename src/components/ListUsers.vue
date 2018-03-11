@@ -1,8 +1,7 @@
 <template>
   <div class="main">
+      {{ getUserItems }}
       <h3>User List</h3>
-
-  {{ getUserItems }}
       <table class="table table-hover">
         <thead>
           <tr>
