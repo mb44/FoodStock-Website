@@ -4,7 +4,7 @@
       <div class="row">
         <fm-header></fm-header>
       </div>
-      <div class="row">
+      <div class="row" v-if="getCurrentUser!=null">
         <fm-auth-status></fm-auth-status>
       </div>
       <div class="row">
@@ -50,13 +50,18 @@ export default {
     fmListUsers: ListUsers
   },
   created() {
+    // Set the Firebase database references once the root container has been created
     this.$store.dispatch('setContainersRef', dbContainersRef)
     this.$store.dispatch('setFoodsRef', dbFoodTypesRef)
     this.$store.dispatch('setUsersRef', dbUsersRef)
+  },
+  computed: {
+    getCurrentUser() {
+      return this.$store.getters.getCurrentUser
+    }
   }
 }
 </script>
 
 <style>
-
 </style>
