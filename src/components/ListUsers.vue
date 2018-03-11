@@ -2,6 +2,7 @@
   <div class="main">
       <h3>User List</h3>
 
+  {{ getUserItems }}
       <table class="table table-hover">
         <thead>
           <tr>
@@ -11,7 +12,7 @@
           </tr>
         </thead>
         <tbody v-for="user in getUserItems" :key="user['user.key']">
-          <tr @click="editUser(user.userid)">
+          <tr @click="editUser(user['.key'])">
             <td scope="row">{{ user.userid }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.privileges }}</td>            

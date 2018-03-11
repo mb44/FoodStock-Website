@@ -2,6 +2,7 @@
   <div class="main">
     <h3>Edit Food type</h3>
 
+    {{ currentFoodType }}
     <button class="btn btn-danger" @click="deleteFoodType">Delete</button>
     <table class="table">
         <thead>
