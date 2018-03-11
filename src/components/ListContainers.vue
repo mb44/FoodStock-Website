@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    {{ getContainerItems }}
       <h3>Container List</h3>
 
 <table class="table table-hover">
