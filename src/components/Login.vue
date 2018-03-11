@@ -21,13 +21,16 @@
 <script>
 import Firebase from 'Firebase'
 import { store } from '../store/store.js'
+import { router } from '../main.js'
 
 // Callback function when auth state changes: update the store
 Firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         store.dispatch('setUser', user)
+        router.replace("/Home")
     } else {
         store.dispatch('setUser', null)
+        router.replace("/Login")
     }
 });
 
