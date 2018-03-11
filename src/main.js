@@ -22,7 +22,7 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 
 const routes = [
-  { path: "/", component: Home },,
+  { path: "/", component: Home },
   { path: "/Login", component: Login },
   { path: "/ListContainers", component: ListContainers },
   { path: "/EditContainer/:containerid", component: EditContainer },
@@ -41,7 +41,6 @@ const router = new VueRouter({
   routes,
   mode: 'history'
 })
-
 
 new Vue({
   el: '#app',
