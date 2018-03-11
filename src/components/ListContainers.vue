@@ -45,7 +45,14 @@ export default {
 
       return res
     }
-  } 
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      }
+    })
+  }
 }
 </script>
 

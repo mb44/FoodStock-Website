@@ -35,10 +35,17 @@ export default {
       }
     },
     computed: {
-    getUserItems() {
-      return this.$store.getters.getUsers
-    }
-  } 
+      getUserItems() {
+        return this.$store.getters.getUsers
+      }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      }
+    })
+  }
 }
 </script>
 

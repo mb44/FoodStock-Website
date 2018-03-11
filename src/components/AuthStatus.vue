@@ -1,5 +1,5 @@
 <template>
-<p><em>Signed in as: {{ getCurrentUser }}&nbsp;-&nbsp;<a @click.prevent="signOut">Sign out</a></em></p>
+    <p><em>Signed in as: {{ getCurrentUser }}&nbsp;-&nbsp;<a @click.prevent="signOut">Sign out</a></em></p>
 </template>
 
 <script>
@@ -24,7 +24,14 @@ export default {
                 alert("Error")
             })
         }
-    } 
+    },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {   
+            if (vm.$store.getters.getCurrentUser == null) {
+            vm.$router.replace("/Login")
+        }
+    })
+  } 
 }
 
 </script>

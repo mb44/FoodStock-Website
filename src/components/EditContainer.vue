@@ -95,20 +95,23 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            var containers = vm.$store.getters.getContainers
+            if (vm.$store.getters.getCurrentUser == null) {
+                vm.$router.replace("/Login")
+            } else {
+                var containers = vm.$store.getters.getContainers
 
-            // Find the item
-            var items = containers.filter(function (obj) { 
-                return obj['.key'] == vm.$route.params.containerid;
-            });
-            
-            if (items.length > 0) {
-                vm.currentContainer = items[0]
+                // Find the item
+                var items = containers.filter(function (obj) { 
+                    return obj['.key'] == vm.$route.params.containerid;
+                });
                 
-            }  
+                if (items.length > 0) {
+                    vm.currentContainer = items[0]
+                }
+            } 
         })
+        }
     }
-}
 </script>
 
 <style scoped>

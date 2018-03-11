@@ -19,8 +19,17 @@ export default {
     gotoManageContainers() {
       this.$router.push("/ListContainers")
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      }
+    })
   }
 }
+
+
 </script>
 
 <style scoped>

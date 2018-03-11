@@ -50,15 +50,19 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      var foods = vm.$store.getters.getFoods
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      } else {      
+        var foods = vm.$store.getters.getFoods
 
-      // Find the item
-      var items = foods.filter(function (obj) { 
-          return obj['.key'] == vm.$route.params.foodtypeid;
-      });
-      
-      if (items.length > 0) {
-        vm.currentFoodType = items[0]
+        // Find the item
+        var items = foods.filter(function (obj) { 
+            return obj['.key'] == vm.$route.params.foodtypeid;
+        });
+        
+        if (items.length > 0) {
+          vm.currentFoodType = items[0]
+        }
       }
     })
   }

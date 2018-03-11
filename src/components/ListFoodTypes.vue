@@ -37,6 +37,13 @@ export default {
     getFoodItems() {
       return this.$store.getters.getFoods
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      }
+    })
   }
 }
 </script>

@@ -36,6 +36,13 @@ export default {
               { id: 5, foodName: 'Eggs', currentAmount: 0.25, progress: Math.round(this.currentAmount*100/this.maxCapacity) },
           ]
       }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      } 
+    })
   }     
 }
 </script>

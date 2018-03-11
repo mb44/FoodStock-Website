@@ -33,6 +33,13 @@ export default {
         dbFoodTypesRef.push({ id: 7, name: this.foodname })
         this.$router.go(-1)
       }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {   
+      if (vm.$store.getters.getCurrentUser == null) {
+        vm.$router.replace("/Login")
+      }
+    })
   }
 }
 </script>
