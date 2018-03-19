@@ -40,13 +40,13 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Container Weight:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Container Weight:</th><td>{{ currentContainer.containerWeight }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
                 <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
             </tr>
             <tr>
-                <th>Current Amount:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Current Amount:</th><td colspan="2">{{ currentContainer.currentAmount }}kg</td>
             </tr>
             <tr>
                 <th>Time to Sleep:</th><td colspan="2"><span v-if="currentContainer.timeToSleep==0">Sleeping...</span><span v-else>{{ currentContainer.timeToSleep}}secs</span></td>
