@@ -11,7 +11,7 @@
             <tr>
                 <th>Update Frequency:</th>
                 <td>
-                    <select v-model="currentContainer.updateFrequency">
+                    <select v-model.number="currentContainer.updateFrequency">
                         <option value="10">10minutes</option>
                         <option value="30">30minutes</option>
                         <option value="60">60minutes</option>
