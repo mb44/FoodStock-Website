@@ -49,7 +49,7 @@
                 <th>Current Amount:</th><td colspan="2">{{ currentContainer.currentAmount }}kg</td>
             </tr>
             <tr>
-                <th>Time to Sleep:</th><td colspan="2"><span v-if="currentContainer.timeToSleep==0">Sleeping...</span><span v-else>{{ currentContainer.timeToSleep}}secs</span></td>
+                <th>Container state:</th><td colspan="2">{{ currentContainer.containerState }}</td>
             </tr>
         </tbody>
     </table>
