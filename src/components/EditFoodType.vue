@@ -41,7 +41,7 @@ export default {
   methods: {
     updateFoodType: function() {
       var newName = document.getElementById("NameInput").value
-      var newReorderThreshold = document.getElementById("ReorderThresholdInput").value
+      var newReorderThreshold = parseFloat(document.getElementById("ReorderThresholdInput").value)
       dbFoodTypesRef.child(this.currentFoodType['.key']).child("name").set(newName)
       dbFoodTypesRef.child(this.currentFoodType['.key']).child("reorderThreshold").set(newReorderThreshold)
     },
