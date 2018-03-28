@@ -9,12 +9,14 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
+            <th scope="col">Reorder threshold</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{{ currentFoodType['.key'] }}</td>
-            <td><input type="text" :value="currentFoodType.name" id="NameInput"></td>            
+            <td><input type="text" :value="currentFoodType.name" id="NameInput"></td>  
+            <td><input type="text" :value="currentFoodType.reorderThreshold" id="ReorderThresholdInput"></td>                      
           </tr>
 
         </tbody>
@@ -32,13 +34,16 @@ export default {
   data: function() {
     return {
       currentFoodType: null,
-      newName: ""
+      newName: "",
+      reorderThreshold: ""
     }
   },
   methods: {
     updateFoodType: function() {
       var newName = document.getElementById("NameInput").value
+      var newReorderThreshold = document.getElementById("ReorderThresholdInput").value
       dbFoodTypesRef.child(this.currentFoodType['.key']).child("name").set(newName)
+      dbFoodTypesRef.child(this.currentFoodType['.key']).child("reorderThreshold").set(newReorderThreshold)
     },
     deleteFoodType: function() {
       var res = confirm("Are you sure you want to delete this food type?")

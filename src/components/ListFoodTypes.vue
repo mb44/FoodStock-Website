@@ -8,12 +8,14 @@
           <tr>
             <th scope="col">id</th>
             <th scope="col">Food name</th>
+            <th scope="col">Reorder threshold</th>
           </tr>
         </thead>
         <tbody v-for="foodtype in getFoodItems" :key="foodtype['.key']">
           <tr @click="editFoodType(foodtype['.key'])">
             <td scope="row">{{ foodtype['.key']}}</td>
             <td>{{ foodtype.name }}</td>
+            <td>{{ foodtype.reorderThreshold }}kg</td>
           </tr>
 
         </tbody>

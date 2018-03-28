@@ -2,20 +2,33 @@
   <div class="main">
       <h3>Add Food Type</h3>
 
-      <form class="form-inline">
-        <div class="form-group mb-2">
-          <label for="exampleInputFoodname">Food name</label>
+      <form class="form from-group-lg">
+        <div class="form-row">
+          <div class="col-md-6 mb-2">
+            <label for="inputFoodname">Food name:</label>
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="inputFoodname" class="sr-only">Food name:</label>
+            <input v-model="foodname" type="text" class="form-control" id="inputFoodname" placeholder="Food name">
+          </div>
         </div>
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="inputFoodname" class="sr-only">Foodname</label>
-          <input v-model="foodname" type="text" class="form-control" id="inputFoodname" placeholder="Foodname">
-        </div>
-        <button type="submit" class="btn btn-primary mb-2" @click.prevent="addFoodType">Submit</button>
-      </form>
 
+        <div class="form-row">
+          <div class="col-md-6 mb-2">
+            <label for="inputReorderThreshold">Reorder threshold:</label>
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="inputReorderThreshold" class="sr-only">Reorder threshold:</label>
+            <input v-model.number="reorderThreshold" type="text" class="form-control" id="inputReorderThreshoold" placeholder="Reorder Threshold">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button type="submit" class="btn btn-primary mb-2" @click.prevent="addFoodType">Submit</button>
+        </div>
+      </form>
   </div>
 </template>
-
 
 <script>
 import { dbContainersRef } from '../firebaseConfig.js'
@@ -25,12 +38,13 @@ import { dbUsersRef } from '../firebaseConfig.js'
 export default {
     data: function() {
       return {
-        foodname: ""
+        foodname: "",
+        reorderThreshold: ""
       }
   },
   methods: {
       addFoodType: function() {
-        dbFoodTypesRef.push({ name: this.foodname })
+        dbFoodTypesRef.push({ name: this.foodname, reorderThreshold: this.reorderThreshold })
         this.$router.go(-1)
       }
   },
