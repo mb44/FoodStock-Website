@@ -14,7 +14,7 @@ import ListUsers from './components/ListUsers.vue'
 import AddUser from './components/AddUser.vue'
 import EditUser from './components/EditUser.vue'
 import AddFoodType from './components/AddFoodType.vue'
-import GenerateShoppingList from './components/GenerateShoppingList'
+import ShoppingList from './components/ShoppingList'
 
 // Make Vue router globally accessible without the need to import it
 Vue.use(VueRouter)
@@ -32,7 +32,7 @@ const routes = [
   { path: "/list-users", component: ListUsers },
   { path: "/add-user", component: AddUser },
   { path: "/edit-user/:userid", component: EditUser },
-  { path: "/generate-shoppinglist", component: GenerateShoppingList },
+  { path: "/shoppinglist", component: ShoppingList },
   { path: "*", redirect: "/" }
 ]
 
