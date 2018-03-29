@@ -63,10 +63,24 @@ import { dbFoodTypesRef } from '../firebaseConfig.js'
 export default {
     data: function() {
         return {
+            containers: [],
             currentContainer: null
             //newName: ""
         }
     },
+    /*
+    watch: {
+        containers: function (val) {
+            // Find the item
+            var items = this.containers.filter(function (obj) { 
+                return obj['.key'] == this.$route.params.containerid;
+            });
+            
+            if (items.length > 0) {
+                this.currentContainer = items[0]
+            }
+        }
+    },*/
     methods: {
         updateUpdateFrequency: function() {
             dbContainersRef.child(this.currentContainer['.key']).child("updateFrequency").set(this.currentContainer.updateFrequency)
@@ -76,13 +90,9 @@ export default {
         }
     },
     computed: {
-        getFoodItems() {
-            
+        getFoodItems() {            
             var foodItems = this.$store.getters.getFoods;
             var foodNames = []
-
-            console.log(foodItems.length)
-
 
             for (var i=0; i<foodItems.length; i++) {
                 foodNames.push( { 
@@ -96,12 +106,12 @@ export default {
     beforeRouteEnter (to, from, next) {
         next(vm => {
             if (vm.$store.getters.getCurrentUser == null) {
-                vm.$router.replace("/Login")
+                vm.$router.replace("/login")
             } else {
-                var containers = vm.$store.getters.getContainers
+                vm.containers = vm.$store.getters.getContainers
 
                 // Find the item
-                var items = containers.filter(function (obj) { 
+                var items = vm.containers.filter(function (obj) { 
                     return obj['.key'] == vm.$route.params.containerid;
                 });
                 
