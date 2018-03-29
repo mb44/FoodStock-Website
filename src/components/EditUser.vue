@@ -19,7 +19,7 @@
 
         </tbody>
       </table>
-    <router-link to="/ListUsers" tag="button" class="btn">Cancel</router-link>
+    <router-link to="/list-users" tag="button" class="btn">Cancel</router-link>
     <button class="btn btn-primary" @click.prevent="updateUser">Submit</button>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
 beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       } else {      
         var users = vm.$store.getters.getUsers
 

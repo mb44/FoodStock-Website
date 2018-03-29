@@ -28,7 +28,7 @@ export default {
   data: function() {
     return {
         editContainer: function(containerid) {
-          this.$router.push({ path: `/EditContainer/${containerid}` })
+          this.$router.push({ path: `/edit-container/${containerid}` })
         }
       }
   },
@@ -50,7 +50,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {   
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       }
     })
   }

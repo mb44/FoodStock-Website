@@ -8,9 +8,9 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav mr-auto">
-          <router-link to="/listcontainers" tag="li"><a class="nav-link">Container Management</a></router-link>
-          <router-link to="/listfoodtypes" tag="li"><a class="nav-link">Food Type Management</a></router-link>
-          <router-link to="/listusers" tag="li"><a class="nav-link">User Management</a></router-link>     
+          <router-link to="/list-containers" tag="li"><a class="nav-link">Container Management</a></router-link>
+          <router-link to="/list-foodtypes" tag="li"><a class="nav-link">Food Type Management</a></router-link>
+          <router-link to="/list-users" tag="li"><a class="nav-link">User Management</a></router-link>     
         </ul>
         <br>
         <!--

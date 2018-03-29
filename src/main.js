@@ -23,16 +23,16 @@ Vue.use(Vuex)
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/Login", component: Login },
-  { path: "/ListContainers", component: ListContainers },
-  { path: "/EditContainer/:containerid", component: EditContainer },
-  { path: "/ListFoodTypes", component: ListFoodTypes },
-  { path: "/AddFoodType", component: AddFoodType },
-  { path: "/EditFoodType/:foodtypeid", component: EditFoodType },
-  { path: "/ListUsers", component: ListUsers },
-  { path: "/AddUser", component: AddUser },
-  { path: "/EditUser/:userid", component: EditUser },
-  { path: "/GenerateShoppingList", component: GenerateShoppingList },
+  { path: "/login", component: Login },
+  { path: "/list-containers", component: ListContainers },
+  { path: "/edit-container/:containerid", component: EditContainer },
+  { path: "/list-foodtypes", component: ListFoodTypes },
+  { path: "/add-foodtype", component: AddFoodType },
+  { path: "/edit-foodtype/:foodtypeid", component: EditFoodType },
+  { path: "/list-users", component: ListUsers },
+  { path: "/add-user", component: AddUser },
+  { path: "/edit-user/:userid", component: EditUser },
+  { path: "/generate-shoppinglist", component: GenerateShoppingList },
   { path: "*", redirect: "/" }
 ]
 

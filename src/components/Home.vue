@@ -4,8 +4,8 @@
     <p><strong>What would you like to do?</strong></p>
 
     <ul>
-      <router-link to="/GenerateShoppingList" tag="a">View shopping list</router-link><br>
-      <router-link to="/ListContainers" tag="a">Manage Containers</router-link>
+      <router-link to="/generate-shoppinglist" tag="a">View shopping list</router-link><br>
+      <router-link to="/list-containers" tag="a">Manage Containers</router-link>
     </ul>
   </div>
 </template>
@@ -14,16 +14,16 @@
 export default {
   methods: {
     gotoShoppingList() {
-      this.$router.push("/generateShoppingList")
+      this.$router.push("/generate-shoppingList")
     },
     gotoManageContainers() {
-      this.$router.push("/ListContainers")
+      this.$router.push("/list-containers")
     }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {   
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       }
     })
   }

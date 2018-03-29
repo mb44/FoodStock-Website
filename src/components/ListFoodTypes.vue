@@ -21,7 +21,7 @@
         </tbody>
       </table>
 
-      <router-link to="/AddFoodType" tag="button" class="btn btn-primary">Add Food Type</router-link>
+      <router-link to="/add-foodtype" tag="button" class="btn btn-primary">Add Food Type</router-link>
 
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   data: function() {
     return {
       editFoodType: function(foodtypeid) {
-        this.$router.push({ path: `/EditFoodType/${foodtypeid}` })
+        this.$router.push({ path: `/edit-foodtype/${foodtypeid}` })
       }
     }
   },
@@ -43,7 +43,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {   
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       }
     })
   }

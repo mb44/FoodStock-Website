@@ -20,7 +20,7 @@
         </tbody>
       </table>
 
-      <router-link to="/AddUser" tag="button" class="btn btn-primary">Add User</router-link>
+      <router-link to="/add-user" tag="button" class="btn btn-primary">Add User</router-link>
 
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
     data: function() {
       return {
         editUser: function(userid) {
-          this.$router.push({ path: `/EditUser/${userid}` })
+          this.$router.push({ path: `/edit-user/${userid}` })
         }
       }
     },
@@ -42,7 +42,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {   
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       }
     })
   }

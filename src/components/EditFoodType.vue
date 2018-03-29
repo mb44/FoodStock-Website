@@ -21,7 +21,7 @@
 
         </tbody>
       </table>
-    <router-link to="/ListFoodTypes" tag="button" class="btn">Cancel</router-link>
+    <router-link to="/list-foodtypes" tag="button" class="btn">Cancel</router-link>
     <button class="btn btn-primary" @click.prevent="updateFoodType">Submit</button>
 
   </div>
@@ -57,7 +57,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+        vm.$router.replace("/login")
       } else {      
         var foods = vm.$store.getters.getFoods
 

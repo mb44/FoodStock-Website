@@ -27,10 +27,10 @@ import { router } from '../main.js'
 Firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         store.dispatch('setUser', user)
-        router.replace("/Home")
+        router.replace("/home")
     } else {
         store.dispatch('setUser', null)
-        router.replace("/Login")
+        router.replace("/login")
     }
 });
 
