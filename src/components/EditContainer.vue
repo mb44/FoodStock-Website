@@ -63,19 +63,21 @@ import { dbFoodTypesRef } from '../firebaseConfig.js'
 export default {
     data: function() {
         return {
-            containers: [],
+            containers: this.$store.getters.getContainers,
             currentContainer: null
             //newName: ""
         }
-    },
-    /*
+    },/*,
     watch: {
-        containers: function (val) {
+        currentContainer: function(val) {
+            currentContainer = val;
+        },
+        containers: function (val) {            
             // Find the item
             var items = this.containers.filter(function (obj) { 
-                return obj['.key'] == this.$route.params.containerid;
+                return obj['id'] == this.$route.params.containerid;
             });
-            
+
             if (items.length > 0) {
                 this.currentContainer = items[0]
             }
@@ -112,7 +114,7 @@ export default {
 
                 // Find the item
                 var items = vm.containers.filter(function (obj) { 
-                    return obj['.key'] == vm.$route.params.containerid;
+                    return obj['id'] == vm.$route.params.containerid;
                 });
                 
                 if (items.length > 0) {
