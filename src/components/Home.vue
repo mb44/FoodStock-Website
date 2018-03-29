@@ -4,7 +4,7 @@
     <p><strong>What would you like to do?</strong></p>
 
     <ul>
-      <router-link to="/GenerateShoppingList" tag="a">Generate shopping list</router-link><br>
+      <router-link to="/GenerateShoppingList" tag="a">View shopping list</router-link><br>
       <router-link to="/ListContainers" tag="a">Manage Containers</router-link>
     </ul>
   </div>
