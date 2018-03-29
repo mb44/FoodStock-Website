@@ -21,17 +21,20 @@
 
 <script>
 export default {
+  data: function() {
+    return {
+      containerItems: this.$store.getters.getContainers,
+      foodTypes: this.$store.getters.getFoods
+    }
+  },
   computed: {
-    getShoppingListItems() {
-      var containerItems = this.$store.getters.getContainers
-      var foodTypes = this.$store.getters.getFoods
-      
+    getShoppingListItems() {    
       var temp = []
       var res = []
 
       var obj = null
-      for (var i=0; i<containerItems.length; i++) {
-        obj = containerItems[i]
+      for (var i=0; i<this.containerItems.length; i++) {
+        obj = this.containerItems[i]
 
         if (!temp[obj.foodName]) {
           temp[obj.foodName] = obj
@@ -43,11 +46,11 @@ export default {
 
       for (var prop in temp) {
         var current = temp[prop]
-        console.log(current)
-        for (var i=0; i<foodTypes.length; i++) {
-          if (foodTypes[i].name==current.foodName && current.currentAmount<foodTypes[i].reorderThreshold) {
+        //console.log(current)
+        for (var i=0; i<this.foodTypes.length; i++) {
+          if (this.foodTypes[i].name==current.foodName && current.currentAmount<this.foodTypes[i].reorderThreshold) {
               current.progress = current.currentAmount*100/current.maxCapacity
-              res.push( current );
+              res.push(current);
               break;
           }
         }
