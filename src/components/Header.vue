@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav mr-auto">
           <router-link to="/list-containers" tag="li"><a class="nav-link">Container Management</a></router-link>
           <router-link to="/list-foodtypes" tag="li"><a class="nav-link">Food Type Management</a></router-link>
-          <router-link to="/list-users" tag="li"><a class="nav-link">User Management</a></router-link>     
+          <router-link to="/list-users" tag="li" v-if="currentUserPrivileges==='admin'"><a class="nav-link">User Management</a></router-link>     
         </ul>
         <br>
         <!--
@@ -27,6 +27,14 @@
 import AuthStatus from './AuthStatus.vue'
 
 export default {
+  computed: {
+    getCurrentUser() {
+        return this.$store.getters.getCurrentUser
+    },
+    currentUserPrivileges() {
+      return this.$store.getters.getCurrentUserPrivileges
+    }
+  },
   components: {
     fmAuthStatus: AuthStatus
   }
