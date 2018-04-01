@@ -8,8 +8,8 @@
 export default {
   beforeRouteEnter (to, from, next) {
     next(vm => {   
-      if (vm.$store.getters.getCurrentUser == null) {
-        vm.$router.replace("/Login")
+      if (vm.$store.getters.getCurrentUser == null || vm.$store.getters.getCurrentUserPrivileges != 'admin') {
+        vm.$router.replace("/login")
       }
     })
   }
