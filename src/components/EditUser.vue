@@ -39,14 +39,15 @@ export default {
       alert("Not implmented yet")
     }
   },
-beforeRouteEnter (to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.$store.getters.getCurrentUser == null || vm.$store.getters.getCurrentUserPrivileges != 'admin') {
         vm.$router.replace("/login")
       } else {      
+        // Get all users
         var users = vm.$store.getters.getUsers
 
-        // Find the item
+        // Find the user item
         var items = users.filter(function (obj) { 
             return obj['.key'] == vm.$route.params.userid;
         });
