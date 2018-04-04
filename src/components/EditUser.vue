@@ -25,6 +25,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Firebase from 'firebase'
+
 export default {
   data: function() {
     return {
@@ -33,10 +36,32 @@ export default {
   },
   methods: {
     updateUser() {
-      alert("Not implemented yet")
+      // Get ID Token from server (round trip). Once retreived call the REST API
+        Firebase.auth().currentUser.getIdToken().then(function(data) {
+          var email = document.getElementById("EmailInput").value
+          var privileges = document.getElementById("PrivInput").value
+
+          axios.patch('http://localhost:8081/users/' + Firebase.auth().currentUser['.key'], {
+              email: email,
+              privileges: privileges,
+              idToken: data
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          })      
     },
-    delete() {
-      alert("Not implmented yet")
+    deleteUser() {
+      axios.delete('http://localhost:8081/users/' + this.currentUser['.key'])
+        .then(function (response) {
+          console(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   },
   beforeRouteEnter (to, from, next) {
