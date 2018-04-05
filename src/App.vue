@@ -29,8 +29,6 @@ import ListContainers from './components/ListContainers.vue'
 import ListFoodTypes from './components/ListFoodTypes.vue'
 import ListUsers from './components/ListUsers.vue'
 import EditContainer from './components/EditContainer.vue'
-import DeleteContainer from './components/DeleteContainer.vue'
-
 
 import { dbContainersRef } from './firebaseConfig.js'
 import { dbFoodTypesRef } from './firebaseConfig.js'
@@ -45,7 +43,6 @@ export default {
     fmAuthStatus: AuthStatus,
     fmListContainers: ListContainers,
     fmEditContainer: EditContainer,
-    fmDeleteContainer: DeleteContainer,
     fmListFoodTypes: ListFoodTypes,
     fmListUsers: ListUsers
   },
