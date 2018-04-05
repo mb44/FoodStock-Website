@@ -38,11 +38,12 @@ export default {
     updateUser() {
       // Get ID Token from server (round trip). Once retreived call the REST API
       var uid = this.currentUser['.key']
-      Firebase.auth().currentUser.getIdToken().then(function(data) {
+
+      Firebase.auth().currentUser.getIdToken().then(function(data) {        
         var email = document.getElementById("EmailInput").value
         var privileges = document.getElementById("PrivInput").value
 
-        axios.patch('http://localhost:8081/v1/users/' + ui + '?idToken='+ data, {
+        axios.patch('http://localhost:8081/v1/users/'+uid+'?idToken='+data, {
             email: email,
             privileges: privileges
           })
@@ -57,7 +58,7 @@ export default {
     deleteUser() {
         var uid = this.currentUser['.key']
         Firebase.auth().currentUser.getIdToken().then(function(data) {
-          axios.delete('http://localhost:8081/v1/users/' + uid + '?idToken=' + data)
+          axios.delete('http://localhost:8081/v1/users/'+uid+'?idToken='+data)
           .then(function (response) {
             console.log(response);
           })

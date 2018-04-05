@@ -59,11 +59,14 @@ export default {
         var mail = this.email
         var pw = this.password 
         var priv = this.privileges
-        Firebase.auth().currentUser.getIdToken().then(function(data) {
-          axios.post('http://localhost:8081/v1/users?idToken='+data, {
-          email: mail,
-          password: pw,
-          privileges: priv
+
+        Firebase.auth().currentUser.getIdToken().then(function(token) {
+          //var tmp = 'http://localhost:8081/v1/users?idToken='+token
+
+          axios.post('http://localhost:8081/v1/users?idToken='+token, {
+          'email': mail,
+          'password': pw,
+          'privileges': priv
           })
           .then(function (response) {
             alert(response);
@@ -74,6 +77,7 @@ export default {
 
           this.$router.go(-1)
         })
+        
       }
   },
   beforeRouteEnter (to, from, next) {
