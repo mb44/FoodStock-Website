@@ -55,7 +55,7 @@ export default {
   },
   methods: {
       addUser: function() {
-        axios.post('http://localhost:8081/users', {
+        axios.post('http://localhost:8081/V1/users', {
         email: this.email,
         password: this.password,
         privileges: this.privileges
