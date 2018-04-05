@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import Firebase from 'firebase'
 import axios from 'axios'
 
 export default {
