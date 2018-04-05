@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Firebase from 'firebase'
+import axios from 'axios'
 
 export default {
   data: function() {
@@ -56,17 +56,18 @@ export default {
         })      
     },
     deleteUser() {
-      var uid = this.currentUser['.key']
+        var uid = this.currentUser['.key']
         Firebase.auth().currentUser.getIdToken().then(function(data) {
-        axios.delete('http://localhost:8081/v1/users/' + uid, {
-        idToken: data
-      })
-        .then(function (response) {
-          console(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          console.log(data)
+          axios.delete('http://localhost:8081/v1/users/' + uid, {
+            idToken: data
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         })
     }
   },
