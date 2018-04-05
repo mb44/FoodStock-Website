@@ -55,19 +55,22 @@ export default {
   },
   methods: {
       addUser: function() {
-        axios.post('http://localhost:8081/V1/users', {
-        email: this.email,
-        password: this.password,
-        privileges: this.privileges
-        })
-        .then(function (response) {
-          alert(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        Firebase.auth().currentUser.getIdToken().then(function(data) {
+          axios.post('http://localhost:8081/V1/users', {
+          idToken: data,
+          email: this.email,
+          password: this.password,
+          privileges: this.privileges
+          })
+          .then(function (response) {
+            alert(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
-        this.$router.go(-1)
+          this.$router.go(-1)
+        })
       }
   },
   beforeRouteEnter (to, from, next) {
@@ -85,5 +88,3 @@ export default {
   margin-top: 50px;
 }
 </style>
-
-
