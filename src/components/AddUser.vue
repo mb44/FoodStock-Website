@@ -56,12 +56,14 @@ export default {
   },
   methods: {
       addUser: function() {
+        var mail = this.email
+        var pw = this.password 
+        var priv = this.privileges
         Firebase.auth().currentUser.getIdToken().then(function(data) {
-          axios.post('http://localhost:8081/v1/users', {
-          idToken: data,
-          email: this.email,
-          password: this.password,
-          privileges: this.privileges
+          axios.post('http://localhost:8081/v1/users?idToken='+data, {
+          email: mail,
+          password: pw,
+          privileges: priv
           })
           .then(function (response) {
             alert(response);
