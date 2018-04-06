@@ -1,25 +1,22 @@
 <template>
   <div class="main">
-    {{ getContainerItems }}
       <h3>Container List</h3>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Food name</th>
-      <th scope="col">Current amount</th>
-    </tr>
-  </thead>
-  <tbody v-for="container in getContainerItems" :key="container['container.key']">
-    <tr @click="editContainer(container['.key'])">
-      <td scope="row">{{ container['.key'] }}</td>
-      <td>{{ container.foodName }}</td>
-      <td><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div> <progress max="100" :value="container.progress"></progress></td>
-    </tr>
-  </tbody>
-</table>
-
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Food name</th>
+            <th scope="col">Current amount</th>
+          </tr>
+        </thead>
+        <tbody v-for="container in getContainerItems" :key="container['container.key']">
+          <tr @click="editContainer(container['.key'])">
+            <td scope="row">{{ container['.key'] }}</td>
+            <td>{{ container.foodName }}</td>
+            <td><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div> <progress max="100" :value="container.progress"></progress></td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </template>
 
