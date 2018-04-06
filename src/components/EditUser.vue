@@ -43,12 +43,12 @@ export default {
         var email = document.getElementById("EmailInput").value
         var privileges = document.getElementById("PrivInput").value
 
-        axios.patch('http://localhost:8081/v1/users/'+uid+'?idToken='+data, {
+        axios.patch('http://localhost:8081/v1/users/'+uid+'?auth='+data, {
             email: email,
             privileges: privileges
           })
           .then(function (response) {
-            console.log(response);
+            console.log(response); 
           })
           .catch(function (error) {
             console.log(error);
@@ -58,7 +58,7 @@ export default {
     deleteUser() {
         var uid = this.currentUser['.key']
         Firebase.auth().currentUser.getIdToken().then(function(data) {
-          axios.delete('http://localhost:8081/v1/users/'+uid+'?idToken='+data)
+          axios.delete('http://localhost:8081/v1/users/'+uid+'?auth='+data)
           .then(function (response) {
             console.log(response);
           })

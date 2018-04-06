@@ -61,9 +61,7 @@ export default {
         var priv = this.privileges
 
         Firebase.auth().currentUser.getIdToken().then(function(token) {
-          //var tmp = 'http://localhost:8081/v1/users?idToken='+token
-
-          axios.post('http://localhost:8081/v1/users?idToken='+token, {
+          axios.post('http://localhost:8081/v1/users?auth='+token, {
           'email': mail,
           'password': pw,
           'privileges': priv
