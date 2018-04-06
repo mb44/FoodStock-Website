@@ -21,10 +21,10 @@ export const store = new Vuex.Store({
         ...firebaseMutations,
         userStatus(state, user) {
             if (user) {
+                state.currentUser = user.email
                 // Fire this function only once
                 return Firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
                     state.currentUserPrivileges = snapshot.val().privileges
-                    state.currentUser = user.email
                   });             
             } else {
                 state.currentUser = null 
