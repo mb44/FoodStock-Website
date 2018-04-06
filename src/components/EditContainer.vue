@@ -44,13 +44,13 @@
                 <th>Container Weight:</th><td>{{ currentContainer.containerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
             </tr>
             <tr>
-                <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
+                <th>Max Capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
             </tr>
             <tr>
                 <th>Current Amount:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('measure')">Update</button></td>
             </tr>
             <tr>
-                <th>Container state:</th><td colspan="2">{{ currentContainer.containerState }}</td>
+                <th>Container State:</th><td colspan="2">{{ currentContainer.containerState }}</td>
             </tr>
         </tbody>
     </table>
