@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import { firebaseAction } from 'vuexfire'
 import { firebaseMutations } from 'vuexfire'
 import Firebase from 'firebase'
-import { containersRef } from '../firebaseConfig'
+import { dbContainersRef } from '../firebaseConfig'
+import { dbFoodTypesRef } from '../firebaseConfig'
 import { dbUsersRef } from '../firebaseConfig'
 
 Vue.use(Vuex)
@@ -22,6 +23,11 @@ export const store = new Vuex.Store({
         userStatus(state, user) {
             if (user) {
                 state.currentUser = user.email
+
+                this.dispatch('setContainersRef', dbContainersRef)
+                this.dispatch('setFoodsRef', dbFoodTypesRef)
+                this.dispatch('setUsersRef', dbUsersRef)
+
                 // Fire this function only once
                 return Firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
                     state.currentUserPrivileges = snapshot.val().privileges
