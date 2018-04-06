@@ -11,7 +11,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><input type="text" :value="currentUser.email" id="EmailInput"></td>
+          <td><input type="text" :value="currentUser.email" class="w-50 w-100" id="EmailInput"></td>
           <td>
             <select v-model="currentUser.privileges" id="inputPrivileges">
               <option value="staff">staff</option>
