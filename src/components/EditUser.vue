@@ -1,7 +1,7 @@
 <template>
-  <div class="main">
+  <div class="main col-sm-8">
     <h3>Edit User</h3>
-    <button class="btn btn-danger" @click="deleteUser">Delete</button>
+    <button class="btn btn-danger float-right mb-2" @click="deleteUser">Delete</button>
     <table class="table">
       <thead>
         <tr>
@@ -103,6 +103,9 @@ export default {
 <style scoped>
 .main {
   margin-top: 50px;
+}
+table {
+  margin-top: 20px;
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="main">
+  <div class="main col-sm-8">
     <h3>Edit Food type</h3>
-    <button class="btn btn-danger" @click="deleteFoodType">Delete</button>
+    <button class="btn btn-danger float-right mb-2" @click="deleteFoodType">Delete</button>
     <table class="table">
         <thead>
           <tr>

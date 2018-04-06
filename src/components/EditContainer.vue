@@ -1,8 +1,6 @@
 <template>
-  <div class="main">
-      <h3>Edit Container</h3>
-
-    {{ currentContainer }}
+  <div class="main col-sm-8">
+    <h3>Edit Container</h3>
     <table class="table">
         <tbody>
             <tr>
@@ -29,13 +27,7 @@
                 <th>Food Type:</th>
                 <td>
                     <select v-model="currentContainer.foodName">
-                        <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>
-                        <!--
-                        <option value="coffee">Coffee</option>
-                        <option value="cashew nuts">Cashew Nuts</option>
-                        <option value="sugar">Sugar</option>
-                        <option value="eggs">Eggs</option>
-                        -->                                       
+                        <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>                                     
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
@@ -129,6 +121,9 @@ export default {
 <style scoped>
 .main {
   margin-top: 50px;
+}
+table {
+  margin-top: 20px;
 }
 </style>
 

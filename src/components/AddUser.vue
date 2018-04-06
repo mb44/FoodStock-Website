@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main col-sm-8">
     <h3>Add User</h3>
 
     <form class="form-horizontal">
