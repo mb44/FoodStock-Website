@@ -1,27 +1,23 @@
 <template>
   <div class="main">
-      {{ getUserItems }}
-      <h3>User List</h3>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Userid</th>
-            <th scope="col">Email</th>
-            <th scope="col">Privileges</th>
-          </tr>
-        </thead>
-        <tbody v-for="user in getUserItems" :key="user['user.key']">
-          <tr @click="editUser(user['.key'])">
-            <td scope="row">{{ user['.key'] }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.privileges }}</td>            
-          </tr>
-
-        </tbody>
-      </table>
-
-      <router-link to="/add-user" tag="button" class="btn btn-primary">Add User</router-link>
-
+    <h3>User List</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Userid</th>
+          <th scope="col">Email</th>
+          <th scope="col">Privileges</th>
+        </tr>
+      </thead>
+      <tbody v-for="user in getUserItems" :key="user['user.key']">
+        <tr @click="editUser(user['.key'])">
+          <td scope="row">{{ user['.key'] }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.privileges }}</td>            
+        </tr>
+      </tbody>
+    </table>
+    <router-link to="/add-user" tag="button" class="btn btn-primary">Add User</router-link>
   </div>
 </template>
 
@@ -57,4 +53,3 @@ tr {
   cursor: pointer;
 }
 </style>
-
