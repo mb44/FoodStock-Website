@@ -12,6 +12,7 @@
                 <th>Update Frequency:</th>
                 <td>
                     <select v-model.number="currentContainer.updateFrequency">
+                        <option value="5">5minutes</option>
                         <option value="10">10minutes</option>
                         <option value="30">30minutes</option>
                         <option value="60">60minutes</option>
@@ -40,13 +41,13 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Container Weight:</th><td>{{ currentContainer.containerWeight }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Container Weight:</th><td>{{ currentContainer.containerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
             </tr>
             <tr>
-                <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning">Update</button></td>
+                <th>Max capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
             </tr>
             <tr>
-                <th>Current Amount:</th><td colspan="2">{{ currentContainer.currentAmount }}kg</td>
+                <th>Current Amount:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('measure')">Update</button></td>
             </tr>
             <tr>
                 <th>Container state:</th><td colspan="2">{{ currentContainer.containerState }}</td>
@@ -63,32 +64,30 @@ import { dbFoodTypesRef } from '../firebaseConfig.js'
 export default {
     data: function() {
         return {
-            containers: this.$store.getters.getContainers,
-            currentContainer: null
-            //newName: ""
+            containers: this.$store.getters.getContainers, // get container items from the store (and Google Firebase)
+            currentContainerId: null, // Needed to make real-time updates to the page
+            currentContainer: null // Keep track of the container that is being edited
         }
-    },/*,
+    },
     watch: {
+        // Watch current container items. Any change will fire this function. Setting the currentContainer will update the page
         currentContainer: function(val) {
-            currentContainer = val;
+            this.currentContainer = val;
         },
-        containers: function (val) {            
-            // Find the item
-            var items = this.containers.filter(function (obj) { 
-                return obj['id'] == this.$route.params.containerid;
-            });
-
-            if (items.length > 0) {
-                this.currentContainer = items[0]
-            }
+        // Watch container items. Any change will fire this function
+        containers: function (val) {     
+           this.currentContainer = this.containers[this.currentContainerId]
         }
-    },*/
+    },
     methods: {
         updateUpdateFrequency: function() {
             dbContainersRef.child(this.currentContainer['.key']).child("updateFrequency").set(this.currentContainer.updateFrequency)
         },
         updateFoodName: function() {
             dbContainersRef.child(this.currentContainer['.key']).child("foodName").set(this.currentContainer.foodName)
+        },
+        setContainerState: function(state) {
+            dbContainersRef.child(this.currentContainer['.key']).child("containerState").set(state)
         }
     },
     computed: {
@@ -119,6 +118,7 @@ export default {
                 
                 if (items.length > 0) {
                     vm.currentContainer = items[0]
+                    vm.currentContainerId = items[0].id
                 }
             } 
         })
