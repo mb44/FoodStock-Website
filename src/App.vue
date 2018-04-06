@@ -30,10 +30,6 @@ import ListFoodTypes from './components/ListFoodTypes.vue'
 import ListUsers from './components/ListUsers.vue'
 import EditContainer from './components/EditContainer.vue'
 
-import { dbContainersRef } from './firebaseConfig.js'
-import { dbFoodTypesRef } from './firebaseConfig.js'
-import { dbUsersRef } from './firebaseConfig.js'
-
 export default {
   components: {
     fmHeader: Header,
@@ -45,12 +41,6 @@ export default {
     fmEditContainer: EditContainer,
     fmListFoodTypes: ListFoodTypes,
     fmListUsers: ListUsers
-  },
-  created() {
-    // Set the Firebase database references once the root container has been created
-    this.$store.dispatch('setContainersRef', dbContainersRef)
-    this.$store.dispatch('setFoodsRef', dbFoodTypesRef)
-    this.$store.dispatch('setUsersRef', dbUsersRef)
   },
   computed: {
     getCurrentUser() {
