@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-     {{ getFoodItems }}
       <h3>Food Type List</h3>
  
       <table class="table table-hover">
