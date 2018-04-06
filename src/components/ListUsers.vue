@@ -1,17 +1,15 @@
 <template>
-  <div class="main col-sm-6">
+  <div class="main col-sm-12 col-md-6">
     <h3>User List</h3>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Userid</th>
           <th scope="col">Email</th>
           <th scope="col">Privileges</th>
         </tr>
       </thead>
       <tbody v-for="user in getUserItems" :key="user['user.key']">
         <tr @click="editUser(user['.key'])">
-          <td scope="row">{{ user['.key'] }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.privileges }}</td>            
         </tr>

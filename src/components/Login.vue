@@ -1,5 +1,4 @@
 <template>
-
 <div class="p-3">
   <h3 class="main col-sm-12 col-md-6">Login</h3>   
 

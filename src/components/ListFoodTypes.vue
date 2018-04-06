@@ -1,18 +1,16 @@
 <template>
-  <div class="main col-sm-6">
+  <div class="main col-sm-12 col-md-6">
       <h3>Food Type List</h3>
  
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">id</th>
             <th scope="col">Food name</th>
             <th scope="col">Reorder threshold</th>
           </tr>
         </thead>
         <tbody v-for="foodtype in getFoodItems" :key="foodtype['.key']">
           <tr @click="editFoodType(foodtype['.key'])">
-            <td scope="row">{{ foodtype['.key']}}</td>
             <td>{{ foodtype.name }}</td>
             <td>{{ foodtype.reorderThreshold }}kg</td>
           </tr>
