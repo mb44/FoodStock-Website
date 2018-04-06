@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div class="container-fluid p-0">
       <div class="row">
         <fm-header></fm-header>
       </div>
-      <div class="row" v-if="getCurrentUser!=null">
+      <div class="row p-3" v-if="getCurrentUser!=null">
         <fm-auth-status></fm-auth-status>
       </div>
-      <div class="row">
+      <div class="row p-3">
         <router-view></router-view>
       </div>
       <!--

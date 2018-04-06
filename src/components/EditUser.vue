@@ -1,5 +1,5 @@
 <template>
-  <div class="main col-sm-8">
+  <div class="main col-sm-6">
     <h3>Edit User</h3>
     <button class="btn btn-danger float-right mb-2" @click="deleteUser">Delete</button>
     <table class="table">

@@ -1,5 +1,5 @@
 <template>
-  <div class="main col-sm-8">
+  <div class="main col-sm-6">
       <h3>Add Food Type</h3>
       <form class="form from-group-lg">
         <div class="form-row">

@@ -1,5 +1,5 @@
 <template>
-  <div class="main col-sm-8">
+  <div class="main col-sm-6">
     <h3>Edit Container</h3>
     <table class="table">
         <tbody>
