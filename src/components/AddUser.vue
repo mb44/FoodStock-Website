@@ -30,12 +30,15 @@
           </div>
           <div class="col-md-6 mb-2">
             <label for="inputPrivileges" class="sr-only">Privileges:</label>
-            <input v-model="privileges" type="text" class="form-control" id="inputPrivileges" placeholder="Privileges">
+              <select v-model="privileges">
+                <option value="staff">staff</option>
+                <option value="admin">admin</option>
+              </select>
           </div>
         </div>
 
         <div class="form-row">
-          <button type="submit" class="btn btn-primary mb-2" @click.prevent="addUser">Submit</button>
+          <button type="submit" class="btn btn-primary mb-2" :disabled="isSubmitDisabled" @click.prevent="addUser">Submit</button>
         </div>
       </form>
 
@@ -46,13 +49,29 @@
 import Firebase from 'firebase'
 import axios from 'axios'
 
+// Email valdidator function using RegEx.
+// See: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase())
+}
+
 export default {
   data: function() {
       return {
         email: "",
         password: "",
-        privileges: ""
+        privileges: "staff"
       }
+  },
+  computed: {
+    isSubmitDisabled: function() {
+      if (validateEmail(this.email) && this.password.length>=6) {
+        return false
+      } else {
+        return true
+      }
+    }
   },
   methods: {
       addUser: function() {
@@ -75,7 +94,6 @@ export default {
 
           this.$router.go(-1)
         })
-        
       }
   },
   beforeRouteEnter (to, from, next) {
