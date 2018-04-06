@@ -1,47 +1,35 @@
 <template>
   <div class="main">
-      <h3>Add User</h3>
+    <h3>Add User</h3>
 
-      <form class="form from-group-lg">
-        <div class="form-row">
-
-          <div class="col-md-6 mb-2">
-            <label for="inputEmail">Email:</label>
-          </div>
-          <div class="col-md-6 mb-2">
-            <label for="inputEmail" class="sr-only">Email:</label>
-            <input v-model="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="inputEmail">Email address</label>
+        <div class="col-sm-10">
+          <input type="email" v-model="email" class="form-control" id="inputEmail" placeholder="Enter email">
         </div>
-
-        <div class="form-row">
-          <div class="col-md-6 mb-2">
-            <label for="inputPassword">Password:</label>
-          </div>
-          <div class="col-md-6 mb-2">
-            <label for="inputPassword" class="sr-only">Password:</label>
-            <input v-model="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-12" for="inputPassword">Password</label>
+        <div class="col-sm-10"> 
+          <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Enter password">
         </div>
-
-        <div class="form-row">
-          <div class="col-md-6 mb-2">
-            <label for="inputPrivileges">Privileges:</label>
+      </div>
+      <div class="form-group">
+          <label class="control-label col-sm-12" for="inputPrivileges">Privileges</label>
+          <div class="col-sm-10"> 
+            <select v-model="privileges" id="inputPrivileges">
+            <option value="staff">staff</option>
+            <option value="admin">admin</option>
+            </select>
           </div>
-          <div class="col-md-6 mb-2">
-            <label for="inputPrivileges" class="sr-only">Privileges:</label>
-              <select v-model="privileges">
-                <option value="staff">staff</option>
-                <option value="admin">admin</option>
-              </select>
-          </div>
+      </div>
+      <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-12">
+          <button type="submit" class="btn btn-primary" :disabled="isSubmitDisabled" @click.prevent="addUser">Submit</button>
         </div>
-
-        <div class="form-row">
-          <button type="submit" class="btn btn-primary mb-2" :disabled="isSubmitDisabled" @click.prevent="addUser">Submit</button>
-        </div>
-      </form>
-
+      </div>
+    </form>
   </div>
 </template>
 
@@ -61,7 +49,7 @@ export default {
       return {
         email: "",
         password: "",
-        privileges: "staff"
+        privileges: "staff" // Initial value
       }
   },
   computed: {
@@ -74,27 +62,29 @@ export default {
     }
   },
   methods: {
-      addUser: function() {
-        var mail = this.email
-        var pw = this.password 
-        var priv = this.privileges
+    addUser: function() {
+      var mail = this.email
+      var pw = this.password 
+      var priv = this.privileges
 
-        Firebase.auth().currentUser.getIdToken().then(function(token) {
-          axios.post('http://localhost:8081/v1/users?auth='+token, {
+      var router = this.$router
+
+      Firebase.auth().currentUser.getIdToken().then(function(token) {
+        axios.post('http://localhost:8081/v1/users?auth='+token, {
           'email': mail,
           'password': pw,
           'privileges': priv
-          })
-          .then(function (response) {
-            alert(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-
-          this.$router.go(-1)
         })
-      }
+        .then(function (response) {
+          console.log(response);
+          router.replace("/list-users")
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Error: could not add user")
+        })
+      })
+    }
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {   
