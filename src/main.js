@@ -16,11 +16,11 @@ import EditUser from './components/EditUser.vue'
 import AddFoodType from './components/AddFoodType.vue'
 import ShoppingList from './components/ShoppingList'
 
-// Make Vue router globally accessible without the need to import it
+// Make Vue router and Vuex globally accessible without the need to import them
 Vue.use(VueRouter)
-
 Vue.use(Vuex)
 
+// Setup http routes
 const routes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -45,6 +45,6 @@ export const router = new VueRouter({
 new Vue({
   el: '#app',
   router, // Inject the router into this Vue instance
-  store,
+  store, // Inject the store into this Vue instance
   render: h => h(App)
 })
