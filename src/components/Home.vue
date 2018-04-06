@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="p-3">
     <h2>Welcome to Food Stock Monitor</h2>
     <p><strong>What would you like to do?</strong></p>
 
     <ul>
       <router-link to="/shoppinglist" tag="a">View shopping list</router-link><br>
-      <router-link to="/list-containers" tag="a">Manage Containers</router-link>
+      <router-link to="/list-containers" tag="a">Manage Containers</router-link><br>
+      <router-link to="/list-foodtypes" tag="a">Manage Food types</router-link>
     </ul>
   </div>
 </template>

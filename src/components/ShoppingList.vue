@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main p-3">
       <h3>Shopping list</h3>
       <table class="table">
         <thead>
