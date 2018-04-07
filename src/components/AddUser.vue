@@ -2,32 +2,45 @@
   <div class="main col-sm-12 col-md-6 p-0">
     <h3>Add User</h3>
 
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-12" for="inputEmail">Email address:</label>
-        <div class="col-sm-10">
+    <form class="form from-group-lg">
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label for="inputEmail">Email address:</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label for="inputEmail" class="sr-only">Email address:</label>
           <input type="email" v-model="email" class="form-control" id="inputEmail" placeholder="Enter email address">
         </div>
       </div>
-      <div class="form-group">
-        <label class="control-label col-sm-12" for="inputPassword">Password:</label>
-        <div class="col-sm-10"> 
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label class="control-label col-sm-12" for="inputPassword">Password:</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
+          <label for="inputPassword" class="sr-only">Password:</label>
           <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Enter password">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-6 mb-2">
           <label class="control-label col-sm-12" for="inputPrivileges">Privileges:</label>
-          <div class="col-sm-10"> 
-            <select v-model="privileges" id="inputPrivileges">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-2"> 
+          <label for="inputPrivileges" class="sr-only">Privileges:</label>
+          <select v-model="privileges" id="inputPrivileges">
             <option value="staff">staff</option>
             <option value="admin">admin</option>
-            </select>
-          </div>
-      </div>
-      <div class="form-group"> 
-        <div class="col-sm-offset-2 col-sm-12">
-          <button type="submit" class="btn btn-primary" :disabled="isSubmitDisabled" @click.prevent="addUser">Submit</button>
+          </select>
         </div>
+      </div>
+      <div class="form-row"> 
+          <button type="submit" class="btn btn-primary" :disabled="isSubmitDisabled" @click.prevent="addUser">Submit</button>
       </div>
     </form>
   </div>

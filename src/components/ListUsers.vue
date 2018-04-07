@@ -4,14 +4,14 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Email</th>
-          <th scope="col">Privileges</th>
+          <th class="w-25" scope="col">Email</th>
+          <th class="w-25" scope="col">Privileges</th>
         </tr>
       </thead>
       <tbody v-for="user in getUserItems" :key="user['user.key']">
         <tr @click="editUser(user['.key'])">
-          <td>{{ user.email }}</td>
-          <td>{{ user.privileges }}</td>            
+          <td class="w-25">{{ user.email }}</td>
+          <td class="w-25">{{ user.privileges }}</td>            
         </tr>
       </tbody>
     </table>
