@@ -1,5 +1,5 @@
 <template>
-  <div class="main col-sm-12 col-md-6">
+  <div class="main col-sm-12 col-md-6 p-0">
     <h3>User List</h3>
     <table class="table table-hover">
       <thead>

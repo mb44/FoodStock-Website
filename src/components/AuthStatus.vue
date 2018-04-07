@@ -1,5 +1,5 @@
 <template>
-  <div class="main col-sm-6">
+  <div class="main col-sm-6 p-0">
     <p><em>Signed in as: {{ getCurrentUser }}&nbsp;-&nbsp;<a @click.prevent="signOut">Sign out</a></em></p>
   </div>
 </template>
