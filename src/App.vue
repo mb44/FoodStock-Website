@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container-fluid p-0">
+    <div class="container-fluid">
       <div class="row">
         <fm-header></fm-header>
       </div>
