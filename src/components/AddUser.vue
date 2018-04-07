@@ -1,7 +1,6 @@
 <template>
   <div class="main col-sm-12 col-md-6 p-0">
     <h3>Add User</h3>
-
     <form class="form from-group-lg">
       <div class="form-row">
         <div class="col-md-6 mb-2">
@@ -14,9 +13,10 @@
           <input type="email" v-model="email" class="form-control" id="inputEmail" placeholder="Enter email address">
         </div>
       </div>
+      
       <div class="form-row">
         <div class="col-md-6 mb-2">
-          <label class="control-label col-sm-12" for="inputPassword">Password:</label>
+          <label for="inputPassword">Password:</label>
         </div>
       </div>
       <div class="form-row">
@@ -27,7 +27,7 @@
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-2">
-          <label class="control-label col-sm-12" for="inputPrivileges">Privileges:</label>
+          <label for="inputPrivileges">Privileges:</label>
         </div>
       </div>
       <div class="form-row">
