@@ -62,7 +62,7 @@ tr {
   cursor: pointer;
 }
 .word-wrap {
-    word-break: break-all;
+    word-break: break-word;
 }
 .fixed {
     table-layout: fixed;
