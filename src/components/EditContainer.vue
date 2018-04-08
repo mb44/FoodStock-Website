@@ -1,7 +1,7 @@
 <template>
   <div class="main col-sm-12 col-md-4 p-0">
     <h3>Edit Container</h3>
-    <table class="table">
+    <table class="table fixed">
         <tbody>
             <tr>
             <th>Id:</th><td colspan="2">{{ currentContainer.id }}</td>
@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <th>Food Type:</th>
-                <td>
+                <td class="scroll">
                     <select v-model="currentContainer.foodName">
                         <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>                                     
                     </select>
@@ -124,6 +124,12 @@ export default {
 }
 table {
   margin-top: 20px;
+}
+.fixed {
+    table-layout: fixed;
+}
+.scroll {
+    overflow-x: scroll;
 }
 </style>
 
