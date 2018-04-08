@@ -3,17 +3,17 @@
       <h3>Container List</h3>
       <table class="table table-hover col-12">
         <thead>
-          <tr class="d-flex">
-            <th class="col-2" scope="col">#</th>
-            <th class="col-5" scope="col">Food name</th>
-            <th class="col-5" scope="col">Current amount</th>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Food name</th>
+            <th scope="col">Current amount</th>
           </tr>
         </thead>
         <tbody v-for="container in getContainerItems" :key="container['container.key']">
-          <tr class="d-flex" @click="editContainer(container['.key'])">
-            <td class="col-2" scope="row">{{ container['.key'] }}</td>
-            <td class="col-5">{{ container.foodName }}</td>
-            <td class="col-5"><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div><progress class="w-75" max="100" :value="container.progress"></progress></td>
+          <tr @click="editContainer(container['.key'])">
+            <td>{{ container['.key'] }}</td>
+            <td>{{ container.foodName }}</td>
+            <td><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div><progress class="w-75" max="100" :value="container.progress"></progress></td>
           </tr>
         </tbody>
       </table>
