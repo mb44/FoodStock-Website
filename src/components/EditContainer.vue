@@ -4,12 +4,12 @@
     <table class="table fixed">
         <tbody>
             <tr>
-            <th>Id:</th><td colspan="2">{{ currentContainer.id }}</td>
+            <th>Id:</th><td colspan="2">{{ getContainerId }}</td>
             </tr>
             <tr>
                 <th>Update Frequency:</th>
                 <td>
-                    <select v-model.number="currentContainer.updateFrequency">
+                    <select v-model.number="getContainerUpdateFrequencey">
                         <option value="5">5minutes</option>
                         <option value="10">10minutes</option>
                         <option value="30">30minutes</option>
@@ -26,23 +26,23 @@
             <tr>
                 <th>Food Type:</th>
                 <td class="scroll">
-                    <select v-model="currentContainer.foodName">
+                    <select v-model="getFoodName">
                         <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>                                     
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Empty Container Weight:</th><td>{{ currentContainer.emptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
+                <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
             </tr>
             <tr>
-                <th>Max Capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
+                <th>Max Capacity:</th><td>{{ getMaxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
             </tr>
             <tr>
-                <th>Current Amount:</th><td>{{ currentContainer.currentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('measure')">Update</button></td>
+                <th>Current Amount:</th><td>{{ getCurrentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('measure')">Update</button></td>
             </tr>
             <tr>
-                <th>Container State:</th><td colspan="2">{{ currentContainer.containerState }}</td>
+                <th>Container State:</th><td colspan="2">{{ getContainerState }}</td>
             </tr>
         </tbody>
     </table>
@@ -94,6 +94,55 @@ export default {
                 )
             }
         return foodNames
+        },
+        getContainerId: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.id
+            } else {
+                return 0
+            }
+        },
+        getContainerUpdateFrequencey: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.updateFrequency
+            } else {
+                return 0
+            }
+        },
+        getFoodName: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.foodName
+            } else {
+                return 0
+            }
+        },
+        getEmptyContainerWeight: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.emptyContainerWeight
+            } else {
+                return 0
+            }
+        },
+        getMaxCapacity: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.maxCapacity
+            } else {
+                return 0
+            }
+        },
+        getCurrentAmount: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.currentAmount
+            } else {
+                return 0
+            }
+        },
+        getContainerState: function() {
+            if (this.currentContainer !== null) {
+                return this.currentContainer.containerState
+            } else {
+                return 0
+            }
         }
     },
     beforeRouteEnter (to, from, next) {

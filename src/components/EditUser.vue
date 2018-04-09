@@ -11,9 +11,9 @@
       </thead>
       <tbody>
         <tr>
-          <td><input type="text" :value="currentUser.email" id="EmailInput"></td>
+          <td><input type="text" :value="getEmail" id="EmailInput"></td>
           <td>
-            <select v-model="currentUser.privileges" id="inputPrivileges">
+            <select v-model="getPrivileges" id="inputPrivileges">
               <option value="staff">staff</option>
               <option value="admin">admin</option>
             </select> 
@@ -33,12 +33,29 @@ export default {
       currentUser: null
     }
   },
+  computed: {
+    getEmail: function() {
+      if (this.currentUser !== null) {
+        return this.currentUser.email
+      } else {
+        return ""
+      }
+    },
+    getPrivileges: function() {
+      if (this.currentUser !== null) {
+        return this.currentUser.privileges
+      } else {
+        return ""
+      }
+    }
+  },
   methods: {
     updateUser() {
       var payload = {}
       payload.uid = this.currentUser['.key']
       payload.email = document.getElementById("EmailInput").value
-      payload.privileges = this.currentUser.privileges
+      var combobox = document.getElementById("inputPrivileges");
+      payload.privileges = combobox.options[combobox.selectedIndex].value;
       payload.router = this.$router
 
       this.$store.commit('updateUser', payload)
