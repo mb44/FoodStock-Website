@@ -65,8 +65,6 @@ export const store = new Vuex.Store({
             var email = payload.email
             var password = payload.password
 
-
-
             Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -81,6 +79,15 @@ export const store = new Vuex.Store({
         },
         addFoodType(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
+        },
+        updateUpdateFrequency: function(state, payload) {
+            dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.updateFrequency)
+        },
+        updateFoodName: function(state, payload) {
+            dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.foodName)
+        },
+        setContainerState: function(state, payload) {
+            dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
         }
     },
     // Actions can be asynchronous or synchronous

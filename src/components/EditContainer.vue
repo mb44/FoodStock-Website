@@ -33,7 +33,7 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Container Weight:</th><td>{{ currentContainer.containerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
+                <th>Empty Container Weight:</th><td>{{ currentContainer.emptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
             </tr>
             <tr>
                 <th>Max Capacity:</th><td>{{ currentContainer.maxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
@@ -73,13 +73,16 @@ export default {
     },
     methods: {
         updateUpdateFrequency: function() {
-            dbContainersRef.child(this.currentContainer['.key']).child("updateFrequency").set(this.currentContainer.updateFrequency)
+            var state = { currentContainerId: this.currentContainer['.key'], updateFrequency: this.currentContainer.updateFrequency }
+            this.$store.commit('updateUpdateFrequency', state)
         },
         updateFoodName: function() {
-            dbContainersRef.child(this.currentContainer['.key']).child("foodName").set(this.currentContainer.foodName)
+            var state = { currentContainerId: this.currentContainer['.key'], foodName: this.currentContainer.foodName }
+            this.$store.commit('updateFoodName', state)
         },
         setContainerState: function(state) {
-            dbContainersRef.child(this.currentContainer['.key']).child("containerState").set(state)
+            var payload = { currentContainerId: this.currentContainer['.key'], newState: state }
+            this.$store.commit('setContainerState', payload)
         }
     },
     computed: {
