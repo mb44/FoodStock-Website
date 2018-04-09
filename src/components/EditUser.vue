@@ -42,7 +42,6 @@ export default {
       payload.router = this.$router
 
       this.$store.commit('updateUser', payload)
-      //this.$router.replace('/list-users')
     },
     deleteUser() {
       var payload = {}
