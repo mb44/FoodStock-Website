@@ -26,22 +26,24 @@ export default {
   data: function() {
     return {
       currentFoodType: null,
-      newName: "",
       reorderThreshold: ""
     }
   },
   methods: {
     updateFoodType: function() {
-      var newName = document.getElementById("NameInput").value
-      var newReorderThreshold = parseFloat(document.getElementById("ReorderThresholdInput").value)
-      dbFoodTypesRef.child(this.currentFoodType['.key']).child("name").set(newName)
-      dbFoodTypesRef.child(this.currentFoodType['.key']).child("reorderThreshold").set(newReorderThreshold)
+      var payload = {}
+      payload.currentFoodTypeId = this.currentFoodType['.key']
+      payload.newName = document.getElementById("NameInput").value
+      payload.newReorderThreshold = parseFloat(document.getElementById("ReorderThresholdInput").value)
+
+      this.$store.commit('updateFoodType', payload)
     },
     deleteFoodType: function() {
       var res = confirm("Are you sure you want to delete this food type?")
-      
+     
       if (res)  {
-        dbFoodTypesRef.child(this.currentFoodType['.key']).remove()
+        var payload = { currentFoodTypeId: this.currentFoodType['.key']}
+        this.$store.commit('deleteFoodType', payload)
         this.$router.go(-1)
       }
     }

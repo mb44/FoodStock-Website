@@ -106,6 +106,14 @@ export const store = new Vuex.Store({
         },
         setContainerState: function(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
+        },
+        updateFoodType: function(state, payload) {
+            dbFoodTypesRef.child(payload.currentFoodTypeId).child("name").set(payload.newName)
+            dbFoodTypesRef.child(payload.currentFoodTypeId).child("reorderThreshold").set(payload.newReorderThreshold)
+          },
+        deleteFoodType: function(state, payload) {
+            dbFoodTypesRef.child(payload.currentFoodTypeId).remove()
+            payload.router.go(-1)
         }
     },
     // Actions can be asynchronous or synchronous
