@@ -98,23 +98,61 @@ export const store = new Vuex.Store({
         addFoodType(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
         },
-        updateUpdateFrequency: function(state, payload) {
+        updateUpdateFrequency(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.updateFrequency)
         },
-        updateFoodName: function(state, payload) {
+        updateFoodName(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.foodName)
         },
-        setContainerState: function(state, payload) {
+        setContainerState(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
         },
-        updateFoodType: function(state, payload) {
+        updateFoodType(state, payload) {
             dbFoodTypesRef.child(payload.currentFoodTypeId).child("name").set(payload.newName)
             dbFoodTypesRef.child(payload.currentFoodTypeId).child("reorderThreshold").set(payload.newReorderThreshold)
           },
-        deleteFoodType: function(state, payload) {
+        deleteFoodType(state, payload) {
             dbFoodTypesRef.child(payload.currentFoodTypeId).remove()
             payload.router.go(-1)
-        }
+        },
+        updateUser(state, payload) {
+            // Get ID Token from server (round trip). Once retreived call the REST API
+            var uid = payload.uid
+            var mail = payload.email
+            var priv = payload.privileges      
+            var vue_router = payload.router
+      
+            Firebase.auth().currentUser.getIdToken().then(function(data) {              
+              Axios.patch('http://localhost:8081/v1/users/'+uid+'?auth='+data, {
+                  email: mail,
+                  privileges: priv
+                })
+                .then(function (response) {
+                  console.log(response); 
+                  vue_router.replace("/list-users")
+                })
+                .catch(function (error) {
+                  alert("Error: user was not updated")
+                  console.log(error);
+                })
+            })      
+          },
+          deleteUser(state, payload) {
+            var vue_router = payload.router      
+            var uid = payload.uid
+
+            Firebase.auth().currentUser.getIdToken().then(function(data) {
+              Axios.delete('http://localhost:8081/v1/users/'+uid+'?auth='+data)
+              .then(function (response) {
+                console.log(response)
+                vue_router.replace("/list-users")
+              })
+              .catch(function (error) {
+                console.log(error)
+                alert("Error: user was not deleted")
+              })
+            })
+          }
     },
     // Actions can be asynchronous or synchronous
     actions: {

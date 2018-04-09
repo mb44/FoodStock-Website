@@ -27,9 +27,6 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-import axios from 'axios'
-
 export default {
   data: function() {
     return {
@@ -38,44 +35,22 @@ export default {
   },
   methods: {
     updateUser() {
-      // Get ID Token from server (round trip). Once retreived call the REST API
-      var uid = this.currentUser['.key']
-      var priv = this.currentUser.privileges
+      var payload = {}
+      payload.uid = this.currentUser['.key']
+      payload.email = document.getElementById("EmailInput").value
+      payload.privileges = this.currentUser.privileges
+      payload.router = this.$router
 
-      var router = this.$router
-
-      Firebase.auth().currentUser.getIdToken().then(function(data) {        
-        var email = document.getElementById("EmailInput").value
-
-        axios.patch('http://localhost:8081/v1/users/'+uid+'?auth='+data, {
-            email: email,
-            privileges: priv
-          })
-          .then(function (response) {
-            console.log(response); 
-            router.replace("/list-users")
-          })
-          .catch(function (error) {
-            alert("Error: user was not updated")
-            console.log(error);
-          })
-      })      
+      this.$store.commit('updateUser', payload)
+      //this.$router.replace('/list-users')
     },
     deleteUser() {
-      var router = this.$router
+      var payload = {}
+      payload.uid = this.currentUser['.key']
+      payload.router = this.$router
 
-      var uid = this.currentUser['.key']
-      Firebase.auth().currentUser.getIdToken().then(function(data) {
-        axios.delete('http://localhost:8081/v1/users/'+uid+'?auth='+data)
-        .then(function (response) {
-          console.log(response)
-          router.replace("/list-users")
-        })
-        .catch(function (error) {
-          console.log(error)
-          alert("Error: user was not deleted")
-        })
-      })
+      this.$store.commit('deleteUser', payload)
+      this.$router.replace('/list-users')
     }
   },
   beforeRouteEnter (to, from, next) {
