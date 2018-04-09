@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import { router } from '../main.js'
 import { firebaseAction } from 'vuexfire'
 import { firebaseMutations } from 'vuexfire'
 import Firebase from 'firebase'
@@ -86,6 +87,13 @@ export const store = new Vuex.Store({
                 alert("Could not login")
             }
             });
+        },
+        signOut(state) {
+            Firebase.auth().signOut().then(function() {
+                alert("Logged out")
+            }).catch(function(error) {
+                alert("Error")
+            })
         },
         addFoodType(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
