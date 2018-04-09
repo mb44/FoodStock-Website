@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 p-0">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <router-link to="/" tag="a"><a class="navbar-brand">Food Stock Monitor</a></router-link>
+      <router-link to="/" tag="a"><a class="navbar-brand">Food Supply Monitor</a></router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
