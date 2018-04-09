@@ -22,8 +22,6 @@
 </template>
 
 <script>
-import { dbFoodTypesRef } from '../firebaseConfig.js'
-
 export default {
   data: function() {
     return {

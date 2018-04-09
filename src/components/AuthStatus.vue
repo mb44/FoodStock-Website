@@ -4,9 +4,7 @@
   </div>
 </template>
 
-<script>
-import Firebase from 'firebase'
-    
+<script> 
 export default {
     computed: {
         getCurrentUser() {

@@ -50,9 +50,6 @@
 </template>
 
 <script>
-import { dbContainersRef } from '../firebaseConfig.js'
-import { dbFoodTypesRef } from '../firebaseConfig.js'
-
 export default {
     data: function() {
         return {
