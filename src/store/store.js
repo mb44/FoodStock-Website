@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios'
 import { firebaseAction } from 'vuexfire'
 import { firebaseMutations } from 'vuexfire'
 import Firebase from 'firebase'
@@ -37,6 +38,28 @@ export const store = new Vuex.Store({
                 state.currentUser = null 
                 state.currentUserPrivileges = null
             }
+        },
+        addUser: function(state, payload) {
+            var mail = payload.email
+            var pw = payload.password 
+            var priv = payload.privileges
+            var vue_router = payload.vuerouter
+           
+            Firebase.auth().currentUser.getIdToken().then(function(token) {
+              Axios.post('http://localhost:8081/v1/users?auth='+token, {
+                'email': mail,
+                'password': pw,
+                'privileges': priv
+              })
+              .then(function (response) {
+                console.log(response);
+                vue_router.replace("/list-users")
+              })
+              .catch(function (error) {
+                console.log(error);
+                alert("Error: could not add user")
+              })
+            })
         },
         addFoodType(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })

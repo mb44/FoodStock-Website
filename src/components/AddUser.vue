@@ -48,7 +48,6 @@
 
 <script>
 import Firebase from 'firebase'
-import axios from 'axios'
 
 // Email valdidator function using RegEx.
 // See: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -76,27 +75,8 @@ export default {
   },
   methods: {
     addUser: function() {
-      var mail = this.email
-      var pw = this.password 
-      var priv = this.privileges
-
-      var router = this.$router
-
-      Firebase.auth().currentUser.getIdToken().then(function(token) {
-        axios.post('http://localhost:8081/v1/users?auth='+token, {
-          'email': mail,
-          'password': pw,
-          'privileges': priv
-        })
-        .then(function (response) {
-          console.log(response);
-          router.replace("/list-users")
-        })
-        .catch(function (error) {
-          console.log(error);
-          alert("Error: could not add user")
-        })
-      })
+      var payload = { email: this.email, password: this.password, privileges: this.privileges, vuerouter: this.$router }
+      this.$store.commit('addUser', payload)
     }
   },
   beforeRouteEnter (to, from, next) {
