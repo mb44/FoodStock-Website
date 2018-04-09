@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-
 // Email valdidator function using RegEx.
 // See: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
