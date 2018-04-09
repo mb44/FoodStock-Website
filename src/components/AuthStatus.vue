@@ -8,11 +8,6 @@
 import Firebase from 'firebase'
     
 export default {
-    data: function() {
-        return {
-
-        }
-    },
     computed: {
         getCurrentUser() {
             return this.$store.getters.getCurrentUser
