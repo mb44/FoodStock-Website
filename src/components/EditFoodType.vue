@@ -11,8 +11,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" class="w-100" :value="currentFoodType.name" id="NameInput"></td>  
-            <td><input type="text" class="w-50" :value="currentFoodType.reorderThreshold" id="ReorderThresholdInput"></td>                      
+            <td><input type="text" class="w-100" :value="getName" id="NameInput"></td>  
+            <td><input type="text" class="w-50" :value="getReorderThreshold" id="ReorderThresholdInput"></td>                      
           </tr>
         </tbody>
       </table>
@@ -25,8 +25,23 @@
 export default {
   data: function() {
     return {
-      currentFoodType: null,
-      reorderThreshold: ""
+      currentFoodType: null
+    }
+  },
+  computed: {
+    getName: function() {
+      if (this.currentFoodType !== null) {
+        return this.currentFoodType.name
+      } else {
+        return ""
+      }
+    },
+    getReorderThreshold: function() {
+      if (this.currentFoodType !== null) {
+        return this.currentFoodType.reorderThreshold
+      } else {
+        return 0
+      }
     }
   },
   methods: {
@@ -44,7 +59,7 @@ export default {
       var id = this.currentFoodType['.key']
       if (res)  {
         var payload = { currentFoodTypeId: id, router: this.$router}
-        alert(payload.currentFoodTypeId)
+        //alert(payload.currentFoodTypeId)
         this.$store.commit('deleteFoodType', payload)
       }
     }
@@ -63,7 +78,6 @@ export default {
         
         if (items.length > 0) {
           vm.currentFoodType = items[0]
-          alert(vm.currentFoodType.name)
         }
       }
     })
