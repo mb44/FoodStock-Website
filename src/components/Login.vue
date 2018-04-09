@@ -23,6 +23,7 @@ import { store } from '../store/store.js'
 import { router } from '../main.js'
 
 // Callback function when auth state changes: update the store
+/*
 Firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         store.dispatch('setUser', user)
@@ -32,6 +33,7 @@ Firebase.auth().onAuthStateChanged(function(user) {
         router.replace("/login")
     }
 });
+*/
 
 export default {
   data: function() {
