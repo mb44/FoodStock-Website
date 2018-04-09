@@ -42,24 +42,12 @@ export default {
   methods: {
     signIn() {
       var emailInput = document.getElementById("InputEmail")
-      var email = emailInput.value
+      var mail = emailInput.value
       var passwordInput = document.getElementById("InputPassword")
-      var password = passwordInput.value
+      var pw = passwordInput.value
 
-      emailInput.value = "";
-      passwordInput.value = "";
-
-      Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      
-      if (errorCode === "auth/wrong-password") {
-        alert("Wrong email and/or password")
-      } else {
-        alert("Could not login")
-      }
-      });
+      var payload = { email: mail, password: pw }
+      this.$store.commit('signIn', payload)
     }
   }
 }

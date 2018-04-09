@@ -61,6 +61,24 @@ export const store = new Vuex.Store({
               })
             })
         },
+        signIn(state, payload) {
+            var email = payload.email
+            var password = payload.password
+
+
+
+            Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            
+            if (errorCode === "auth/wrong-password") {
+                alert("Wrong email and/or password")
+            } else {
+                alert("Could not login")
+            }
+            });
+        },
         addFoodType(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
         }
