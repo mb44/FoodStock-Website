@@ -10,6 +10,16 @@ import { dbUsersRef } from '../firebaseConfig'
 
 Vue.use(Vuex)
 
+Firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        store.dispatch('setUser', user)
+        router.replace("/home")
+    } else {
+        store.dispatch('setUser', null)
+        router.replace("/login")
+    }
+});
+
 export const store = new Vuex.Store({
     state: {
         containerItems: [], // Array of container items
