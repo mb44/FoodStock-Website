@@ -15,11 +15,7 @@ export default {
     },
     methods: {
         signOut() {
-            Firebase.auth().signOut().then(function() {
-                alert("Logged out")
-            }).catch(function(error) {
-                alert("Error")
-            })
+            this.$store.commit('signOut')
         }
     },
     beforeRouteEnter (to, from, next) {
