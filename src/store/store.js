@@ -17,10 +17,11 @@ export const store = new Vuex.Store({
         currentUser: null,   // Type object. Initially, the user is not signed in
         currentUserPrivileges: null
     },
+    // Mutations are synchronous
     mutations: {
-        // mutations (used by firebase to mutate states)
+        // firrebaseMutations (used by firebase to mutate states)
         ...firebaseMutations,
-        userStatus(state, user) {
+        setUserStatus(state, user) {
             if (user) {
                 state.currentUser = user.email
 
@@ -36,8 +37,12 @@ export const store = new Vuex.Store({
                 state.currentUser = null 
                 state.currentUserPrivileges = null
             }
+        },
+        addFoodType(state, payload) {
+            dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
         }
     },
+    // Actions can be asynchronous or synchronous
     actions: {
         setContainersRef: firebaseAction(({bindFirebaseRef}, ref) => {
           bindFirebaseRef('containerItems', ref)
@@ -50,7 +55,7 @@ export const store = new Vuex.Store({
         }),
         // Log in
         setUser(context, user) {
-            context.commit('userStatus', user)  
+            context.commit('setUserStatus', user)  
         }
     },
     getters: {

@@ -34,20 +34,17 @@
 </template>
 
 <script>
-import { dbContainersRef } from '../firebaseConfig.js'
-import { dbFoodTypesRef } from '../firebaseConfig.js'
-import { dbUsersRef } from '../firebaseConfig.js'
-
 export default {
     data: function() {
       return {
         foodname: "",
-        reorderThreshold: ""
+        reorderThreshold: null
       }
   },
   methods: {
       addFoodType: function() {
-        dbFoodTypesRef.push({ name: this.foodname, reorderThreshold: this.reorderThreshold })
+        var payload = { name: this.foodname, reorderThreshold: this.reorderThreshold}
+        this.$store.commit('addFoodType', payload)
         this.$router.go(-1)
       }
   },
