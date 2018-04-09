@@ -35,16 +35,17 @@ export default {
       payload.currentFoodTypeId = this.currentFoodType['.key']
       payload.newName = document.getElementById("NameInput").value
       payload.newReorderThreshold = parseFloat(document.getElementById("ReorderThresholdInput").value)
+      payload.router = this.$router
 
       this.$store.commit('updateFoodType', payload)
     },
     deleteFoodType: function() {
       var res = confirm("Are you sure you want to delete this food type?")
-     
+      var id = this.currentFoodType['.key']
       if (res)  {
-        var payload = { currentFoodTypeId: this.currentFoodType['.key']}
+        var payload = { currentFoodTypeId: id, router: this.$router}
+        alert(payload.currentFoodTypeId)
         this.$store.commit('deleteFoodType', payload)
-        this.$router.replace('/list-foodtypes')
       }
     }
   },
@@ -62,6 +63,7 @@ export default {
         
         if (items.length > 0) {
           vm.currentFoodType = items[0]
+          alert(vm.currentFoodType.name)
         }
       }
     })

@@ -43,9 +43,8 @@ export default {
   },
   methods: {
       addFoodType: function() {
-        var payload = { name: this.foodname, reorderThreshold: this.reorderThreshold}
+        var payload = { name: this.foodname, reorderThreshold: this.reorderThreshold, router: this.$router }
         this.$store.commit('addFoodType', payload)
-        this.$router.go(-1)
       }
   },
   beforeRouteEnter (to, from, next) {

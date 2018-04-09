@@ -95,14 +95,17 @@ export const store = new Vuex.Store({
                 alert("Error")
             })
         },
-        addFoodType(state, payload) {
+        addFoodType: function(state, payload) {
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
+            payload.router.replace('/list-foodtypes')
         },
         updateUpdateFrequency(state, payload) {
-            dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.updateFrequency)
+            dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.newUpdateFrequency)
+            payload.router.replace('/list-foodtypes')
         },
         updateFoodName(state, payload) {
-            dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.foodName)
+            dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newName)
+            payload.router.replace('/list-foodtypes')
         },
         setContainerState(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
@@ -111,9 +114,9 @@ export const store = new Vuex.Store({
             dbFoodTypesRef.child(payload.currentFoodTypeId).child("name").set(payload.newName)
             dbFoodTypesRef.child(payload.currentFoodTypeId).child("reorderThreshold").set(payload.newReorderThreshold)
           },
-        deleteFoodType(state, payload) {
+        deleteFoodType: function(state, payload) {
             dbFoodTypesRef.child(payload.currentFoodTypeId).remove()
-            payload.router.go(-1)
+            payload.router.replace('list-foodtypes')
         },
         updateUser(state, payload) {
             // Get ID Token from server (round trip). Once retreived call the REST API
