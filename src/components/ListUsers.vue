@@ -1,16 +1,16 @@
 <template>
   <div class="main col-sm-12 col-md-4 p-0">
     <h3>User List</h3>
-    <table class="table table-hover">
+    <table class="table table-hover fixed">
       <thead>
         <tr>
-          <th class="w-25" scope="col">Email</th>
+          <th class="w-50" scope="col">Email</th>
           <th class="w-25" scope="col">Privileges</th>
         </tr>
       </thead>
       <tbody v-for="user in getUserItems" :key="user['user.key']">
         <tr @click="editUser(user['.key'])">
-          <td class="w-25">{{ user.email }}</td>
+          <td class="w-50 word-wrap">{{ user.email }}</td>
           <td class="w-25">{{ user.privileges }}</td>            
         </tr>
       </tbody>
@@ -49,5 +49,11 @@ export default {
 }
 tr {
   cursor: pointer;
+}
+.word-wrap {
+    word-break: break-word;
+}
+.fixed {
+    table-layout: fixed;
 }
 </style>

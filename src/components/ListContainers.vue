@@ -1,18 +1,18 @@
 <template>
   <div class="main col-sm-12 col-md-4 p-0">
       <h3>Container List</h3>
-      <table class="table table-hover col-12">
+      <table class="table table-hover col-12 fixed">
         <thead>
-          <tr class="d-flex">
-            <th class="col-2" scope="col">#</th>
+          <tr>
+            <th class="col-2 w-25" scope="col">#</th>
             <th class="col-5" scope="col">Food name</th>
             <th class="col-5" scope="col">Current amount</th>
           </tr>
         </thead>
         <tbody v-for="container in getContainerItems" :key="container['container.key']">
-          <tr class="d-flex" @click="editContainer(container['.key'])">
-            <td class="col-2" scope="row">{{ container['.key'] }}</td>
-            <td class="col-5">{{ container.foodName }}</td>
+          <tr @click="editContainer(container['.key'])">
+            <td class="col-2 w-25">{{ container['.key'] }}</td>
+            <td class="col-5 word-wrap">{{ container.foodName }}</td>
             <td class="col-5"><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div><progress class="w-75" max="100" :value="container.progress"></progress></td>
           </tr>
         </tbody>
@@ -60,6 +60,12 @@ export default {
 }
 tr {
   cursor: pointer;
+}
+.word-wrap {
+    word-break: break-word;
+}
+.fixed {
+    table-layout: fixed;
 }
 </style>
 
