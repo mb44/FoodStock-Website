@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import { router } from '../main.js'
-import { firebaseAction } from 'vuexfire'
-import { firebaseMutations } from 'vuexfire'
 import Firebase from 'firebase'
 import { dbContainersRef } from '../firebaseConfig'
 import { dbFoodTypesRef } from '../firebaseConfig'
@@ -32,14 +30,18 @@ export const store = new Vuex.Store({
     // Mutations are synchronous
     mutations: {
         // firrebaseMutations (used by firebase to mutate states)
-        ...firebaseMutations,
+        //...firebaseMutations,
         setUserStatus(state, user) {
             if (user) {
                 state.currentUser = user.email
 
-                this.dispatch('setContainersRef', dbContainersRef)
-                this.dispatch('setFoodsRef', dbFoodTypesRef)
-                this.dispatch('setUsersRef', dbUsersRef)
+                //this.dispatch('setContainersRef', dbContainersRef)
+                //this.dispatch('setFoodsRef', dbFoodTypesRef)
+                //this.dispatch('setUsersRef', dbUsersRef)
+
+                this.dispatch('setContainersRef')
+                this.dispatch('setFoodsRef')
+                this.dispatch('setUsersRef')
 
                 // Fire this function only once
                 return Firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
@@ -96,16 +98,14 @@ export const store = new Vuex.Store({
             })
         },
         addFoodType: function(state, payload) {
+            morten()
             dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
-            payload.router.replace('/list-foodtypes')
         },
         updateUpdateFrequency(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.newUpdateFrequency)
-            payload.router.replace('/list-foodtypes')
         },
         updateFoodName(state, payload) {
-            dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newName)
-            payload.router.replace('/list-foodtypes')
+            dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newFoodName)
         },
         setContainerState(state, payload) {
             dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
@@ -116,7 +116,6 @@ export const store = new Vuex.Store({
           },
         deleteFoodType: function(state, payload) {
             dbFoodTypesRef.child(payload.currentFoodTypeId).remove()
-            payload.router.replace('list-foodtypes')
         },
         updateUser(state, payload) {
             // Get ID Token from server (round trip). Once retreived call the REST API
@@ -159,15 +158,49 @@ export const store = new Vuex.Store({
     },
     // Actions can be asynchronous or synchronous
     actions: {
-        setContainersRef: firebaseAction(({bindFirebaseRef}, ref) => {
-          bindFirebaseRef('containerItems', ref)
-        }),
-        setFoodsRef: firebaseAction(({bindFirebaseRef}, ref) => {
-            bindFirebaseRef('foodItems', ref)
-        }),
-        setUsersRef: firebaseAction(({bindFirebaseRef}, ref) => {
-            bindFirebaseRef('userItems', ref)
-        }),
+        setContainersRef: function() {
+            dbContainersRef.on("value", function(snapshot) {
+                // Clear array, so we can populate it with data
+                store.state.containerItems.length = 0
+                snapshot.forEach(function (childSnapshot) {
+                    var item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    console.log(item)
+                    store.state.containerItems.push(item);
+                });
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+        },
+        setFoodsRef: function() {
+            // Attach an asynchronous callback to read the data at our posts reference
+            dbFoodTypesRef.on("value", function(snapshot) {
+                // Clear array, so we can populate it with data
+                store.state.foodItems.length = 0
+                snapshot.forEach(function (childSnapshot) {
+                    var item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    console.log(item)
+                    store.state.foodItems.push(item);
+                });
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+        },
+        setUsersRef: function() {
+            dbUsersRef.on("value", function(snapshot) {
+                // Clear array, so we can populate it with data
+                store.state.userItems.length = 0
+                snapshot.forEach(function (childSnapshot) {
+                    var item = childSnapshot.val();
+                    item.key = childSnapshot.key;
+                    console.log(item)
+                    store.state.userItems.push(item);
+                });
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+        },
         // Log in
         setUser(context, user) {
             context.commit('setUserStatus', user)  
