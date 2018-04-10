@@ -75,6 +75,7 @@ export default {
     addUser: function() {
       var payload = { email: this.email, password: this.password, privileges: this.privileges, vuerouter: this.$router }
       this.$store.commit('addUser', payload)
+      this.$router.replace('list-users')
     }
   },
   beforeRouteEnter (to, from, next) {
