@@ -56,16 +56,18 @@ export default {
       payload.email = document.getElementById("EmailInput").value
       var combobox = document.getElementById("inputPrivileges");
       payload.privileges = combobox.options[combobox.selectedIndex].value;
+      payload.vuerouter = this.$router
 
       this.$store.commit('updateUser', payload)
-      this.$router.replace('list-users')
+      //this.$router.replace('list-users')
     },
     deleteUser() {
       var payload = {}
       payload.uid = this.currentUser['key']
+      payload.vuerouter = this.$router
 
       this.$store.commit('deleteUser', payload)
-      this.$router.replace('/list-users')
+      //this.$router.replace('/list-users')
     }
   },
   beforeRouteEnter (to, from, next) {
