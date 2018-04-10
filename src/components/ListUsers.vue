@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody v-for="user in getUserItems" :key="user['user.key']">
-        <tr @click="editUser(user['.key'])">
+        <tr @click="editUser(user['key'])">
           <td class="w-50 word-wrap">{{ user.email }}</td>
           <td class="w-25">{{ user.privileges }}</td>            
         </tr>

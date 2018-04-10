@@ -10,8 +10,8 @@
           </tr>
         </thead>
         <tbody v-for="container in getContainerItems" :key="container['container.key']">
-          <tr @click="editContainer(container['.key'])">
-            <td class="col-2 w-25">{{ container['.key'] }}</td>
+          <tr @click="editContainer(container['key'])">
+            <td class="col-2 w-25">{{ container['key'] }}</td>
             <td class="col-5 word-wrap">{{ container.foodName }}</td>
             <td class="col-5"><div>{{ container.currentAmount }}kg/{{ container.maxCapacity}}kg</div><progress class="w-75" max="100" :value="container.progress"></progress></td>
           </tr>

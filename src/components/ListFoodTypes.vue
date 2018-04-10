@@ -9,8 +9,8 @@
             <th scope="col">Reorder threshold</th>
           </tr>
         </thead>
-        <tbody v-for="foodtype in getFoodItems" :key="foodtype['.key']">
-          <tr @click="editFoodType(foodtype['.key'])">
+        <tbody v-for="foodtype in getFoodItems" :key="foodtype['key']">
+          <tr @click="editFoodType(foodtype['key'])">
             <td class="word-wrap">{{ foodtype.name }}</td>
             <td>{{ foodtype.reorderThreshold }}kg</td>
           </tr>
