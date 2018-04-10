@@ -47,20 +47,21 @@ export default {
   methods: {
     updateFoodType: function() {
       var payload = {}
-      payload.currentFoodTypeId = this.currentFoodType['.key']
+      payload.currentFoodTypeId = this.currentFoodType['key']
       payload.newName = document.getElementById("NameInput").value
       payload.newReorderThreshold = parseFloat(document.getElementById("ReorderThresholdInput").value)
-      payload.router = this.$router
 
       this.$store.commit('updateFoodType', payload)
+      this.$router.replace('/list-foodtypes')
     },
     deleteFoodType: function() {
       var res = confirm("Are you sure you want to delete this food type?")
-      var id = this.currentFoodType['.key']
+      var id = this.currentFoodType['key']
       if (res)  {
-        var payload = { currentFoodTypeId: id, router: this.$router}
+        var payload = { currentFoodTypeId: id}
         //alert(payload.currentFoodTypeId)
         this.$store.commit('deleteFoodType', payload)
+        this.$router.replace('/list-foodtypes')
       }
     }
   },
@@ -73,7 +74,7 @@ export default {
 
         // Find the item
         var items = foods.filter(function (obj) { 
-            return obj['.key'] == vm.$route.params.foodtypeid;
+            return obj['key'] == vm.$route.params.foodtypeid;
         });
         
         if (items.length > 0) {

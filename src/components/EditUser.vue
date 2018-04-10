@@ -52,18 +52,17 @@ export default {
   methods: {
     updateUser() {
       var payload = {}
-      payload.uid = this.currentUser['.key']
+      payload.uid = this.currentUser['key']
       payload.email = document.getElementById("EmailInput").value
       var combobox = document.getElementById("inputPrivileges");
       payload.privileges = combobox.options[combobox.selectedIndex].value;
-      payload.router = this.$router
 
       this.$store.commit('updateUser', payload)
+      this.$router.replace('list-users')
     },
     deleteUser() {
       var payload = {}
-      payload.uid = this.currentUser['.key']
-      payload.router = this.$router
+      payload.uid = this.currentUser['key']
 
       this.$store.commit('deleteUser', payload)
       this.$router.replace('/list-users')
@@ -79,7 +78,7 @@ export default {
 
         // Find the user item
         var items = users.filter(function (obj) { 
-            return obj['.key'] == vm.$route.params.userid;
+            return obj['key'] == vm.$route.params.userid;
         })
         
         if (items.length > 0) {

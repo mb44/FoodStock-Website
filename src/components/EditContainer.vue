@@ -9,7 +9,7 @@
             <tr>
                 <th>Update Frequency:</th>
                 <td>
-                    <select v-model.number="getContainerUpdateFrequencey">
+                    <select id="inputUpdateFrequency" v-model.number="getContainerUpdateFrequencey">
                         <option value="5">5minutes</option>
                         <option value="10">10minutes</option>
                         <option value="30">30minutes</option>
@@ -25,9 +25,10 @@
             </tr>
             <tr>
                 <th>Food Type:</th>
-                <td class="scroll">
-                    <select v-model="getFoodName">
-                        <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['.key']"> {{ option.text }}</option>                                     
+                <!--<td class="scroll">-->
+                <td>
+                    <select id="inputFoodName" v-model="getFoodName">
+                        <option v-for="option in getFoodItems" v-bind:value="option.value" :key="option['key']"> {{ option.text }}</option>                                     
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
@@ -70,15 +71,25 @@ export default {
     },
     methods: {
         updateUpdateFrequency: function() {
-            var state = { currentContainerId: this.currentContainer['.key'], updateFrequency: this.currentContainer.updateFrequency }
-            this.$store.commit('updateUpdateFrequency', state)
+            //alert(this.currentContainerId)
+            var payload = {}
+            payload.currentContainerId = this.currentContainer['id']
+            var combobox = document.getElementById("inputUpdateFrequency");
+            payload.newUpdateFrequency = combobox.options[combobox.selectedIndex].value;
+
+
+            this.$store.commit('updateUpdateFrequency', payload)
         },
         updateFoodName: function() {
-            var state = { currentContainerId: this.currentContainer['.key'], foodName: this.currentContainer.foodName }
-            this.$store.commit('updateFoodName', state)
+            var payload = {}
+            var combobox = document.getElementById("inputFoodName");
+            payload.currentContainerId = this.currentContainer['id']
+            payload.newFoodName = combobox.options[combobox.selectedIndex].value;
+
+            this.$store.commit('updateFoodName', payload)
         },
         setContainerState: function(state) {
-            var payload = { currentContainerId: this.currentContainer['.key'], newState: state }
+            var payload = { currentContainerId: this.currentContainerId, newState: state }
             this.$store.commit('setContainerState', payload)
         }
     },
@@ -177,9 +188,11 @@ table {
 .fixed {
     table-layout: fixed;
 }
+/*
 .scroll {
     overflow-x: scroll;
 }
+*/
 </style>
 
 
