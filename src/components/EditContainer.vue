@@ -83,7 +83,7 @@ export default {
         updateFoodName: function() {
             var payload = {}
             var combobox = document.getElementById("inputFoodName");
-            payload.currentContainerId = this.currentContainer['id']
+            payload.currentContainerId = this.currentContainerId
             payload.newFoodName = combobox.options[combobox.selectedIndex].value;
 
             this.$store.commit('updateFoodName', payload)
