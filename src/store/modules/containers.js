@@ -1,18 +1,9 @@
 import { dbContainersRef } from '../../firebaseConfig'
 import { store } from '../store'
-import { mapActions } from 'vuex'
 
 const state = {
     containerItems: [] // Array of container items
 }
-
-/*
-const methods = {
-    ...mapActions([
-        'setUsersRef'
-    ])
-}
-*/
 
 const mutations = {
     updateUpdateFrequency(state, payload) {

@@ -7,15 +7,9 @@ const state = {
     foodItems: [],      // Array of food types
 }
 
-const methods = {
-    ...mapActions([
-        'setFoodTypesRef'
-    ])
-}
 
 const mutations = {
     addFoodType: function(state, payload) {
-        morten()
         dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
     },
     updateFoodType(state, payload) {

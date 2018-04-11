@@ -1,7 +1,6 @@
 import { store } from '../store'
 import Axios from 'axios'
 import Firebase from 'firebase'
-//import { mapActions } from 'vuex'
 import { router } from '../../main.js'
 import { dbUsersRef } from '../../firebaseConfig'
 
@@ -20,14 +19,6 @@ const state = {
     currentUser: null,   // Type object. Initially, the user is not signed in
     currentUserPrivileges: null
 }
-
-/*
-const methods = 
-    ...mapActions([
-        'setUsersRef'
-        ])
-}
-*/
 
 const mutations = { 
     setUserStatus(state, user) {

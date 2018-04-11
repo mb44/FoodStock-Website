@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { router } from '../main.js'
-import Firebase from 'firebase'
 
 // Import modules for (a) Users, (b) containers, (c) foodtypes
 import users from './modules/users'
