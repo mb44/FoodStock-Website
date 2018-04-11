@@ -15,6 +15,17 @@ Vue.use(Vuex)
 
 class Database {
     // Abstract methods for Users
+    getUsers(state) {
+        throw "getUsers not implemented!"
+    }
+
+    getCurrentUser(state) {
+        throw "getCurrentUser not implemented!"
+    }
+    getCurrentUserPrivileges(state) {
+        throw "getCurrentPrivileges not implemented!"
+    }
+
     signIn(email, password) { 
         throw "signIn not implemented!"
     }
@@ -36,11 +47,15 @@ class Database {
     }
 
     // Abstract methods for Containers
+    getContainers(state) {
+        throw "getContainers not implemented!"
+    }
+
     updateUpdateFrequency(containerId, newUpdateFrequency) {
         throw "updateUpdateFrequency not implemented!"
     }
     
-    updateFoodName(containerId, newFoodName) {
+    updateFoodName(containerId, foodName) {
         throw "updateFoodName not implemented!"
     }
     setContainerState(containerId, newState) {
@@ -48,10 +63,14 @@ class Database {
     }
 
     // Abstract methods for Food types
+    getFoodTypes(state) {
+        throw "getFoodTypes not implemented"
+    }
+
     addFoodType(foodName, reorderThreshold) {
         throw "addFoodType not implemented!"
     }
-    updateFoodType(foodTypeId, newFoodName) {
+    updateFoodType(foodTypeId, foodName, reorderThreshold) {
         throw "updateFoodType not implemented!"
     }
 
@@ -79,6 +98,7 @@ class FirebaseDatabase extends Database {
 
     setContainersRef(state) {
         dbContainersRef.on("value", function(snapshot) {
+            console.log(state)
             // Clear array, so we can populate it with data
             state.containerItems.length = 0
             snapshot.forEach(function (childSnapshot) {
@@ -96,12 +116,12 @@ class FirebaseDatabase extends Database {
         // Attach an asynchronous callback to read the data at our posts reference
         dbFoodTypesRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
-            state.foodItems.length = 0
+            state.foodTypeItems.length = 0
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
                 item.key = childSnapshot.key;
                 console.log(item)
-                state.foodItems.push(item);
+                state.foodTypeItems.push(item);
             });
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
@@ -109,6 +129,17 @@ class FirebaseDatabase extends Database {
     }
 
     // Override methods for Users
+    getUsers(state) {
+        return state.userItems
+    }
+
+    getCurrentUser(state) {
+        return state.currentUser
+    }
+    getCurrentUserPrivileges(state) {
+        return state.currentUserPrivileges
+    }
+
     signIn(email, password) { 
         Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             // Handle Errors here.
@@ -178,24 +209,33 @@ class FirebaseDatabase extends Database {
     }
 
     // Override methods for Containers
+    getContainers(state) {
+        return state.containerItems
+    }
+
     updateUpdateFrequency(containerId, newUpdateFrequency) {
         dbContainersRef.child(containerId).child("updateFrequency").set(newUpdateFrequency)
     }
     
-    updateFoodName(containerId, newFoodName) {
-        dbContainersRef.child(containerId).child("foodName").set(newFoodName)
+    updateFoodName(containerId, foodName) {
+        dbContainersRef.child(containerId).child("foodName").set(foodName)
     }
     setContainerState(containerId, newState) {
         dbContainersRef.child(containerId).child("containerState").set(newState)
     }
 
     // Override methods for Food types
+    getFoodTypes(state) {
+        return state.foodTypeItems
+    }
+
     addFoodType(foodName, threshold) {
         dbFoodTypesRef.push({ name:foodName, reorderThreshold: threshold })
     }
     
-    updateFoodType(foodTypeId, newFoodName) {
-        dbFoodTypesRef.child(foodTypeId).child("name").set(newFoodName)
+    updateFoodType(foodTypeId, foodName, reorderThreshold) {
+        dbFoodTypesRef.child(foodTypeId).child("name").set(foodName)
+        dbFoodTypesRef.child(foodTypeId).child("reorderThreshold").set(reorderThreshold)
     }
 
     deleteFoodType(foodTypeId) {

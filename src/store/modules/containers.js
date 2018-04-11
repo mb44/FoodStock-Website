@@ -9,15 +9,12 @@ const state = {
 const mutations = {
     updateUpdateFrequency(state, payload) {
         db.updateUpdateFrequency(payload.currentContainerId, payload.newUpdateFrequency)
-        //dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.newUpdateFrequency)
     },
     updateFoodName(state, payload) {
         db.updateFoodName(payload.currentContainerId, payload.newFoodName)
-        //dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newFoodName)
     },
     setContainerState(state, payload) {
         db.setContainerState(payload.currentContainerId, payload.newState)
-        //dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
     }
 }
 
@@ -25,25 +22,14 @@ const mutations = {
 const actions = {
     setContainersRef: function() {
         db.setContainersRef(state)
-        /*
-        dbContainersRef.on("value", function(snapshot) {
-            // Clear array, so we can populate it with data
-            state.containerItems.length = 0
-            snapshot.forEach(function (childSnapshot) {
-                var item = childSnapshot.val();
-                item.key = childSnapshot.key;
-                console.log(item)
-                state.containerItems.push(item);
-            });
-        }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-        */
     }
 }
 
 const getters = {
-    getContainers: state => state.containerItems
+    getContainers: function(state) {
+        return db.getContainers(state)
+        //return state.containerItems
+    }
 }
 
 export default {

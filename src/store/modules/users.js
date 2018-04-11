@@ -76,9 +76,15 @@ const actions = {
 }
 
 const getters = {
-    getUsers: state => state.userItems,
-    getCurrentUser: state => state.currentUser,
-    getCurrentUserPrivileges: state => state.currentUserPrivileges
+    getUsers: function(state) {
+        return db.getUsers(state)
+    },
+    getCurrentUser: function(state) {
+        return db.getCurrentUser(state)
+    },
+    getCurrentUserPrivileges: function(state) {
+        return db.getCurrentUserPrivileges(state)
+    }
 }
 
 export default {

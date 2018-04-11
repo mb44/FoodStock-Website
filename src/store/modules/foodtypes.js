@@ -2,7 +2,7 @@ import { dbFoodTypesRef } from '../../firebaseConfig'
 import { db, store } from '../store'
 
 const state = {
-    foodItems: []
+    foodTypeItems: []
 }
 
 // Mutations are synchronous
@@ -12,7 +12,7 @@ const mutations = {
         //dbFoodTypesRef.push({ name: payload.name, reorderThreshold: payload.reorderThreshold })
     },
     updateFoodType(state, payload) {
-        db.updateFoodType(payload.currentFoodTypeId, payload.newName)
+        db.updateFoodType(payload.currentFoodTypeId, payload.newName, payload.newReorderThreshold)
         //dbFoodTypesRef.child(payload.currentFoodTypeId).child("name").set(payload.newName)
         //dbFoodTypesRef.child(payload.currentFoodTypeId).child("reorderThreshold").set(payload.newReorderThreshold)
       },
@@ -30,7 +30,9 @@ const actions = {
 }
 
 const getters = {
-    getFoods: state => state.foodItems
+    getFoods: function(state) {
+        return db.getFoodTypes(state)
+    }
 }
 
 export default {
