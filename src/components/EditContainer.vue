@@ -71,19 +71,17 @@ export default {
     },
     methods: {
         updateUpdateFrequency: function() {
-            //alert(this.currentContainerId)
             var payload = {}
             payload.currentContainerId = this.currentContainer['id']
             var combobox = document.getElementById("inputUpdateFrequency");
-            payload.newUpdateFrequency = combobox.options[combobox.selectedIndex].value;
-
+            payload.newUpdateFrequency = combobox.options[combobox.selectedIndex].value
 
             this.$store.commit('updateUpdateFrequency', payload)
         },
         updateFoodName: function() {
             var payload = {}
             var combobox = document.getElementById("inputFoodName");
-            payload.currentContainerId = this.currentContainerId
+            payload.currentContainerId = this.currentContainer['id']
             payload.newFoodName = combobox.options[combobox.selectedIndex].value;
 
             this.$store.commit('updateFoodName', payload)

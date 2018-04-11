@@ -1,24 +1,31 @@
-import { dbContainersRef } from '../../firebaseConfig'
-import { store } from '../store'
+import {dbContainersRef } from '../../firebaseConfig'
+import {db, store} from '../store'
 
 const state = {
-    containerItems: [] // Array of container items
+    containerItems: []
 }
 
+// Mutations are synchronous
 const mutations = {
     updateUpdateFrequency(state, payload) {
-        dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.newUpdateFrequency)
+        db.updateUpdateFrequency(payload.currentContainerId, payload.newUpdateFrequency)
+        //dbContainersRef.child(payload.currentContainerId).child("updateFrequency").set(payload.newUpdateFrequency)
     },
     updateFoodName(state, payload) {
-        dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newFoodName)
+        db.updateFoodName(payload.currentContainerId, payload.newFoodName)
+        //dbContainersRef.child(payload.currentContainerId).child("foodName").set(payload.newFoodName)
     },
     setContainerState(state, payload) {
-        dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
+        db.setContainerState(payload.currentContainerId, payload.newState)
+        //dbContainersRef.child(payload.currentContainerId).child("containerState").set(payload.newState)
     }
 }
 
+// Actions are synchronous or asynchronous
 const actions = {
     setContainersRef: function() {
+        db.setContainersRef(state)
+        /*
         dbContainersRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
             state.containerItems.length = 0
@@ -31,6 +38,7 @@ const actions = {
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
+        */
     }
 }
 
