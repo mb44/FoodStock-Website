@@ -108,7 +108,7 @@ class FirebaseDatabase extends Database {
         });
     }
 
-    // Abstract methods for Users
+    // Override methods for Users
     signIn(email, password) { 
         Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             // Handle Errors here.
@@ -177,7 +177,7 @@ class FirebaseDatabase extends Database {
         })
     }
 
-    // Abstract methods for Containers
+    // Override methods for Containers
     updateUpdateFrequency(containerId, newUpdateFrequency) {
         dbContainersRef.child(containerId).child("updateFrequency").set(newUpdateFrequency)
     }
@@ -189,7 +189,7 @@ class FirebaseDatabase extends Database {
         dbContainersRef.child(containerId).child("containerState").set(newState)
     }
 
-    // Abstract methods for Food types
+    // Override methods for Food types
     addFoodType(foodName, threshold) {
         dbFoodTypesRef.push({ name:foodName, reorderThreshold: threshold })
     }
