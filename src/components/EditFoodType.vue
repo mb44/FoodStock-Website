@@ -59,7 +59,6 @@ export default {
       var id = this.currentFoodType['key']
       if (res)  {
         var payload = { currentFoodTypeId: id}
-        //alert(payload.currentFoodTypeId)
         this.$store.commit('deleteFoodType', payload)
         this.$router.replace('/list-foodtypes')
       }
