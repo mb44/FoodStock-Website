@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Firebase from 'firebase'
 import Axios from 'axios'
-import { dbUsersRef } from '../firebaseConfig'
-import { dbContainersRef } from '../firebaseConfig'
-import { dbFoodTypesRef } from '../firebaseConfig'
+import { router } from '../main.js'
 
 // Import modules for (a) Users, (b) containers, (c) foodtypes
 import users from './modules/users'
@@ -12,6 +10,14 @@ import containers from './modules/containers'
 import foodtypes from './modules/foodtypes'
 
 Vue.use(Vuex)
+
+export const store = new Vuex.Store({
+    modules: {
+        users,
+        containers,
+        foodtypes
+    }
+})
 
 class Database {
     // Abstract methods for Users
@@ -80,48 +86,78 @@ class Database {
 }
 
 class FirebaseDatabase extends Database {
+    // Constructor
+    constructor(config) {
+        super()
+        // Initialize Firebase
+        var firebaseApp = Firebase.initializeApp(config);
+        var db = firebaseApp.database();
+
+        this.dbContainersRef = db.ref('containers')
+        this.dbFoodTypesRef = db.ref('foodtypes')
+        this.dbUsersRef = db.ref('users')
+    }
+
+    setAuthStatus(store, user) {
+        if (user) {                
+            store.users.currentUser = user.email
+
+            // Fetch data from Fire base when the user has been authenticated
+            db.setUsersRef(store)
+            db.setContainersRef(store)
+            db.setFoodTypesRef(store)
+
+            // Fire this function only once (to get the authenticated user privileges)
+            return Firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
+                store.users.currentUserPrivileges = snapshot.val().privileges
+                });      
+        } else {
+            store.users.currentUser = null 
+            store.users.currentUserPrivileges = null
+        }
+    }
+
     // Private helper methods
-    setUsersRef(state) {
-        dbUsersRef.on("value", function(snapshot) {
+    setUsersRef(store) {
+        this.dbUsersRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
-            state.userItems.length = 0
+            store.users.userItems.length = 0
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
                 item.key = childSnapshot.key;
                 console.log(item)
-                state.userItems.push(item);
+                store.users.userItems.push(item);
             });
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
     }
 
-    setContainersRef(state) {
-        dbContainersRef.on("value", function(snapshot) {
-            console.log(state)
+    setContainersRef(store) {
+        this.dbContainersRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
-            state.containerItems.length = 0
+            store.containers.containerItems.length = 0
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
                 item.key = childSnapshot.key;
                 console.log(item)
-                state.containerItems.push(item);
+                store.containers.containerItems.push(item);
             });
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
     }
 
-    setFoodTypesRef(state) {
+    setFoodTypesRef(store) {
         // Attach an asynchronous callback to read the data at our posts reference
-        dbFoodTypesRef.on("value", function(snapshot) {
+        this.dbFoodTypesRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
-            state.foodTypeItems.length = 0
+            store.foodtypes.foodTypeItems.length = 0
             snapshot.forEach(function (childSnapshot) {
                 var item = childSnapshot.val();
                 item.key = childSnapshot.key;
                 console.log(item)
-                state.foodTypeItems.push(item);
+                store.foodtypes.foodTypeItems.push(item);
             });
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
@@ -139,7 +175,7 @@ class FirebaseDatabase extends Database {
     getCurrentUserPrivileges(state) {
         return state.currentUserPrivileges
     }
-
+    
     signIn(email, password) { 
         Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             // Handle Errors here.
@@ -214,14 +250,14 @@ class FirebaseDatabase extends Database {
     }
 
     updateUpdateFrequency(containerId, newUpdateFrequency) {
-        dbContainersRef.child(containerId).child("updateFrequency").set(newUpdateFrequency)
+        this.dbContainersRef.child(containerId).child("updateFrequency").set(newUpdateFrequency)
     }
     
     updateFoodName(containerId, foodName) {
-        dbContainersRef.child(containerId).child("foodName").set(foodName)
+        this.dbContainersRef.child(containerId).child("foodName").set(foodName)
     }
     setContainerState(containerId, newState) {
-        dbContainersRef.child(containerId).child("containerState").set(newState)
+        this.dbContainersRef.child(containerId).child("containerState").set(newState)
     }
 
     // Override methods for Food types
@@ -230,26 +266,40 @@ class FirebaseDatabase extends Database {
     }
 
     addFoodType(foodName, threshold) {
-        dbFoodTypesRef.push({ name:foodName, reorderThreshold: threshold })
+        this.dbFoodTypesRef.push({ name:foodName, reorderThreshold: threshold })
     }
     
     updateFoodType(foodTypeId, foodName, reorderThreshold) {
-        dbFoodTypesRef.child(foodTypeId).child("name").set(foodName)
-        dbFoodTypesRef.child(foodTypeId).child("reorderThreshold").set(reorderThreshold)
+        this.dbFoodTypesRef.child(foodTypeId).child("name").set(foodName)
+        this.dbFoodTypesRef.child(foodTypeId).child("reorderThreshold").set(reorderThreshold)
     }
 
     deleteFoodType(foodTypeId) {
-        dbFoodTypesRef.child(foodTypeId).remove()
+        this.dbFoodTypesRef.child(foodTypeId).remove()
     }
 }
 
+var config = {
+    apiKey: "AIzaSyBxlo2I0gI-2c5nb3w9feXabKInEvVotj8",
+    authDomain: "foodwastereduction-6ca48.firebaseapp.com",
+    databaseURL: "https://foodwastereduction-6ca48.firebaseio.com",
+    projectId: "foodwastereduction-6ca48",
+    storageBucket: "foodwastereduction-6ca48.appspot.com",
+    messagingSenderId: "1042753730745"
+};
 
-export const db = new FirebaseDatabase()
+export const db = new FirebaseDatabase(config)
 
-export const store = new Vuex.Store({
-    modules: {
-        users,
-        containers,
-        foodtypes
+Firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        store.dispatch('setUser', user)
+        if (router !== null) {
+            router.replace("/home")
+        }
+    } else {
+        store.dispatch('setUser', null)
+        if (router !== null) {
+            router.replace("/login")
+        }
     }
 })

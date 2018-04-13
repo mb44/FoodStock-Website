@@ -1,4 +1,3 @@
-import {dbContainersRef } from '../../firebaseConfig'
 import {db, store} from '../store'
 
 const state = {
@@ -20,21 +19,17 @@ const mutations = {
 
 // Actions are synchronous or asynchronous
 const actions = {
-    setContainersRef: function() {
-        db.setContainersRef(state)
-    }
 }
 
 const getters = {
     getContainers: function(state) {
         return db.getContainers(state)
-        //return state.containerItems
     }
 }
 
 export default {
     state,
     mutations,
-    actions,
+    //actions,
     getters
 }
