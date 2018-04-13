@@ -23,8 +23,8 @@
 export default {
     data: function() {
       return {
-        editUser: function(userid) {
-          this.$router.push({ path: `/edit-user/${userid}` })
+        editUser: function(uid) {
+          this.$router.push({ path: `/edit-user/${uid}` })
         }
       }
     },

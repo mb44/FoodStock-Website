@@ -76,6 +76,7 @@ class Database {
     addFoodType(foodName, reorderThreshold) {
         throw "addFoodType not implemented!"
     }
+
     updateFoodType(foodTypeId, foodName, reorderThreshold) {
         throw "updateFoodType not implemented!"
     }
@@ -98,6 +99,7 @@ class FirebaseDatabase extends Database {
         this.dbUsersRef = db.ref('users')
     }
 
+    // Private helper methods
     setAuthStatus(store, user) {
         if (user) {                
             store.users.currentUser = user.email
@@ -117,7 +119,6 @@ class FirebaseDatabase extends Database {
         }
     }
 
-    // Private helper methods
     setUsersRef(store) {
         this.dbUsersRef.on("value", function(snapshot) {
             // Clear array, so we can populate it with data
@@ -260,7 +261,7 @@ class FirebaseDatabase extends Database {
         this.dbContainersRef.child(containerId).child("containerState").set(newState)
     }
 
-    // Override methods for Food types
+    // Override methods for FoodTypes
     getFoodTypes(state) {
         return state.foodTypeItems
     }

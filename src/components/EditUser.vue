@@ -80,7 +80,7 @@ export default {
 
         // Find the user item
         var items = users.filter(function (obj) { 
-            return obj['key'] == vm.$route.params.userid;
+            return obj['key'] == vm.$route.params.uid;
         })
         
         if (items.length > 0) {
