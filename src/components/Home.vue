@@ -1,6 +1,6 @@
 <template>
   <div class="p-0">
-    <h2>Welcome to Food Stock Monitor</h2>
+    <h2>Welcome to Food Supply Monitor</h2>
     <p><strong>What would you like to do?</strong></p>
 
     <ul>
