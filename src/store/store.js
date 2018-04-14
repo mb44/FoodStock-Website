@@ -201,10 +201,13 @@ class FirebaseDatabase extends Database {
 
     addUser(email, password, privileges) {
         Firebase.auth().currentUser.getIdToken().then(function(token) {
-            Axios.post('http://localhost:8081/v1/users?auth='+token, {
-            'email': email,
-            'password': password,
-            'privileges': privileges
+            Axios.post('http://46.101.119.255:8081/v1/users?auth='+token, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+                'email': email,
+                'password': password,
+                'privileges': privileges
             })
             .then(function (response) {
                 console.log(response);
@@ -218,7 +221,10 @@ class FirebaseDatabase extends Database {
 
     updateUser(uid, email, privileges) {   
         Firebase.auth().currentUser.getIdToken().then(function(data) {              
-            Axios.patch('http://localhost:8081/v1/users/'+uid+'?auth='+data, {
+            Axios.patch('http://46.101.119.255:8081/v1/users/'+uid+'?auth='+data, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
                 'email': email,
                 'privileges': privileges
             })
@@ -234,7 +240,11 @@ class FirebaseDatabase extends Database {
 
     deleteUser(uid) {
         Firebase.auth().currentUser.getIdToken().then(function(data) {
-            Axios.delete('http://localhost:8081/v1/users/'+uid+'?auth='+data)
+            Axios.delete('http://46.101.119.255:8081/v1/users/'+uid+'?auth='+data, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
             .then(function (response) {
                 console.log(response)
             })
