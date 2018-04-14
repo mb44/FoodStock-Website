@@ -31,7 +31,7 @@ const routes = [
   { path: "/edit-foodtype/:foodtypeid", component: EditFoodType },
   { path: "/list-users", component: ListUsers },
   { path: "/add-user", component: AddUser },
-  { path: "/edit-user/:userid", component: EditUser },
+  { path: "/edit-user/:uid", component: EditUser },
   { path: "/shoppinglist", component: ShoppingList },
   { path: "*", redirect: "/" }
 ]
