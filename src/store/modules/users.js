@@ -25,10 +25,8 @@ const mutations = {
         payload.vuerouter.replace("/list-users")
     },
     deleteUser(state, payload) {
-        var vue_router = payload.vuerouter      
-
         db.deleteUser(payload.uid)
-        vue_router.replace('/list-users')
+        payload.vuerouter.replace('/list-users')
     }    
 }
 
