@@ -72,16 +72,16 @@ export default {
     methods: {
         updateUpdateFrequency: function() {
             var payload = {}
-            payload.currentContainerId = this.currentContainer['id']
+            payload.currentContainerId = this.currentContainer['key']
             var combobox = document.getElementById("inputUpdateFrequency");
-            payload.newUpdateFrequency = combobox.options[combobox.selectedIndex].value
+            payload.newUpdateFrequency = parseInt(combobox.options[combobox.selectedIndex].value)
 
             this.$store.commit('updateUpdateFrequency', payload)
         },
         updateFoodName: function() {
             var payload = {}
             var combobox = document.getElementById("inputFoodName");
-            payload.currentContainerId = this.currentContainer['id']
+            payload.currentContainerId = this.currentContainer['key']
             payload.newFoodName = combobox.options[combobox.selectedIndex].value;
 
             this.$store.commit('updateFoodName', payload)
@@ -106,7 +106,7 @@ export default {
         },
         getContainerId: function() {
             if (this.currentContainer !== null) {
-                return this.currentContainer.id
+                return this.currentContainer['key']
             } else {
                 return 0
             }
@@ -163,12 +163,12 @@ export default {
 
                 // Find the item
                 var items = vm.containers.filter(function (obj) { 
-                    return obj['id'] == vm.$route.params.containerid;
+                    return obj['key'] == vm.$route.params.containerid;
                 });
                 
                 if (items.length > 0) {
                     vm.currentContainer = items[0]
-                    vm.currentContainerId = items[0].id
+                    vm.currentContainerId = items[0].key
                 }
             } 
         })
