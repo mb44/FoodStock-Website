@@ -8,6 +8,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav mr-auto">
+          <router-link to="/shoppinglist" tag="li"><a class="nav-link">Shopping List</a></router-link>
           <router-link to="/list-containers" tag="li"><a class="nav-link">Container Management</a></router-link>
           <router-link to="/list-foodtypes" tag="li"><a class="nav-link">Food Type Management</a></router-link>
           <router-link to="/list-users" tag="li" v-if="currentUserPrivileges==='admin'"><a class="nav-link">User Management</a></router-link>     
