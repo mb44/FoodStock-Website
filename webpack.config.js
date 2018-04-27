@@ -1,5 +1,6 @@
 var path = require('path')
-var webpack = require('webpack')
+const webpack = require('webpack')
+var nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   entry: './src/main.js',
@@ -52,8 +53,7 @@ module.exports = {
   },
   performance: {
     hints: false
-  },
-  devtool: '#eval-source-map'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -76,3 +76,12 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
 }
+
+/*
+if (process.env.NODE_ENV === 'test') {
+  // exclude NPM deps from test bundle
+  module.exports.externals = [require('webpack-node-externals')()]
+  // use inline source map so that it works with mocha-webpack
+  module.exports.devtool = 'inline-cheap-module-source-map'
+}
+*/
