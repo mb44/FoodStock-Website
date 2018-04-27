@@ -1,5 +1,6 @@
 <template>
   <div class="main col-sm-12 col-md-4 p-0">
+    {{ getContainerItems }}
       <h3>Container List</h3>
       <table class="table table-hover col-12 fixed">
         <thead>
