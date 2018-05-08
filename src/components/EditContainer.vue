@@ -15,7 +15,7 @@
                         <option value="300">5minutes</option>
                         <option value="600">10minutes</option>
                         <option value="1800">30minutes</option>
-                        <option value="3600">60minutes</option>
+                        <option value="3600">1hour</option>
                         <option value="7200">2hours</option>
                         <option value="14400">4hours</option>
                         <option value="21600">6hours</option>
