@@ -10,15 +10,17 @@
                 <th>Update Frequency:</th>
                 <td>
                     <select id="inputUpdateFrequency" v-model.number="getContainerUpdateFrequencey">
-                        <option value="5">5minutes</option>
-                        <option value="10">10minutes</option>
-                        <option value="30">30minutes</option>
-                        <option value="60">60minutes</option>
-                        <option value="120">2hours</option>
-                        <option value="240">4hours</option>
-                        <option value="360">6hours</option>
-                        <option value="720">12hours</option>
-                        <option value="1440">24hours</option>
+                        <option value="5">5seconds</option>
+                        <option value="60">1minute</option>
+                        <option value="300">5minutes</option>
+                        <option value="600">10minutes</option>
+                        <option value="1800">30minutes</option>
+                        <option value="3600">60minutes</option>
+                        <option value="7200">2hours</option>
+                        <option value="14400">4hours</option>
+                        <option value="21600">6hours</option>
+                        <option value="43200">12hours</option>
+                        <option value="86400">24hours</option>
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateUpdateFrequency">Submit</button></td>
