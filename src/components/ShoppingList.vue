@@ -11,8 +11,10 @@
         <tbody v-for="item in getShoppingListItems" :key="item['.key']">
           <tr>
             <td>{{ item.foodName }}</td>
-            <td><div>{{ item.currentAmount }}kg/{{ item.maximumCapacity}}kg</div> 
-            <progress max="100" :value="(item.currentAmount-item.emptyContainerWeight)*100/(item.maximumCapacity-item.emptyContainerWeight).toFixed(0)"></progress></td>
+            <td>
+              <div>{{ item.currentAmount }}kg/{{ item.maximumCapacity}}kg</div> 
+              <progress max="100" :value="item.progress"></progress>
+            </td>
           </tr>
         </tbody>
       </table>
