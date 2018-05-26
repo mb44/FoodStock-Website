@@ -52,7 +52,7 @@ export default {
         //console.log(current)
         for (var i=0; i<this.foodTypes.length; i++) {
           if (this.foodTypes[i].name==current.foodName && current.currentAmount<this.foodTypes[i].reorderThreshold) {
-              current.progress = current.currentAmount*100/current.maximumCapacity
+              current.progress = ((current.currentAmount-current.getEmptyContainerWeight)*100/(current.maximumCapacity-current.getEmptyContainerWeight)).toFixed(0)
               res.push(current);
               break;
           }
