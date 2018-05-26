@@ -10,16 +10,17 @@
                 <th>Update Frequency:</th>
                 <td>
                     <select id="inputUpdateFrequency" v-model.number="getContainerUpdateFrequency">
-                        <option value="1">1 minute</option>
-                        <option value="5">5 minutes</option>
-                        <option value="10">10 minutes</option>
-                        <option value="30">30 minutes</option>
-                        <option value="60">60 minutes</option>
-                        <option value="120">2 hours</option>
-                        <option value="240">4 hours</option>
-                        <option value="360">6 hours</option>
-                        <option value="720">12 hours</option>
-                        <option value="1440">24 hours</option>
+                        <option value="5">5 seconds</option>
+                        <option value="60">1 minute</option>
+                        <option value="300">5 minutes</option>
+                        <option value="600">10 minutes</option>
+                        <option value="1800">30 minutes</option>
+                        <option value="3600">1 hour</option>
+                        <option value="7200">2 hours</option>
+                        <option value="14400">4 hours</option>
+                        <option value="21600">6 hours</option>
+                        <option value="43200">12 hours</option>
+                        <option value="86400">24 hours</option>
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateUpdateFrequency">Submit</button></td>
@@ -35,13 +36,13 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainerWeight')">Update</button></td>
+                <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight.toFixed(3) }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainerWeight')">Update</button></td>
             </tr>
             <tr>
                 <th>Max Capacity:</th><td>{{ getMaxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maximumCapacity')">Update</button></td>
             </tr>
             <tr>
-                <th>Current Amount:</th><td>{{ getCurrentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('currentAmount')">Update</button></td>
+                <th>Current Amount:</th><td>{{  getCurrentAmount.toFixed(3) }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('currentAmount')">Update</button></td>
             </tr>
             <tr>
                 <th>Container State:</th><td colspan="2">{{ getContainerState }}</td>
