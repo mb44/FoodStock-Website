@@ -14,8 +14,8 @@
           <tr @click="editContainer(container['key'])">
             <td class="col-2 w-25">{{ container['key'] }}</td>
             <td class="col-5 word-wrap">{{ container.foodName }}</td>
-            <td class="col-5"><div>{{ (container.currentAmount-container.emptyContainerWeight).toFixed(3) }}kg/{{ (container.maximumCapacity-container.emptyContainerWeight).toFixed(3) }}kg</div>
-              <progress class="w-75" max="100" :value="Math.round(container.currentAmount-container.emptyContainerWeight)*100/(container.maximumCapacity-container.emptyContainerWeight)"></progress>
+            <td class="col-5"><div>{{ container.currentAmount-container.emptyContainerWeight }}kg/{{ container.maxCapacity-container.emptyContainerWeight}}kg</div>
+              <progress class="w-75" max="100" :value="(container.currentAmount-container.emptyContainerWeight)*100/(container.maximumCapacity-container.emptyContainerWeight).toFixed(0)"></progress>
             </td>
           </tr>
         </tbody>
