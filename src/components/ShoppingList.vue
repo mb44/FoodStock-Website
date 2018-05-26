@@ -11,11 +11,10 @@
         <tbody v-for="item in getShoppingListItems" :key="item['.key']">
           <tr>
             <td>{{ item.foodName }}</td>
-            <td><div>{{ item.currentAmount }}kg/{{ item.maxCapacity}}kg</div> <progress max="100" :value="item.progress"></progress></td>
+            <td><div>{{ (item.currentAmount).toFixed(3) }}kg/{{ (item.maximumCapacity).toFixed(3) }}kg</div> <progress max="100" :value="item.progress"></progress></td>
           </tr>
         </tbody>
       </table>
-
   </div>
 </template>
 
@@ -40,7 +39,7 @@ export default {
           temp[obj.foodName] = obj
         } else {
           temp[obj.foodName].currentAmount += obj.currentAmount
-          temp[obj.foodName].maxCapacity += obj.maxCapacity
+          temp[obj.foodName].maximumCapacity += obj.maximumCapacity
         }
       }
 
@@ -48,8 +47,8 @@ export default {
         var current = temp[prop]
         //console.log(current)
         for (var i=0; i<this.foodTypes.length; i++) {
-          if (this.foodTypes[i].name==current.foodName && current.currentAmount<this.foodTypes[i].reorderThreshold) {
-              current.progress = current.currentAmount*100/current.maxCapacity
+          if (this.foodTypes[i].name==current.foodName && (current.currentAmount-current.emptyContainerWeight)<this.foodTypes[i].reorderThreshold) {
+              current.progress = ((current.currentAmount-current.emptyContainerWeight)*100/(current.maximumCapacity-current.emptyContainerWeight)).toFixed(0)
               res.push(current);
               break;
           }
