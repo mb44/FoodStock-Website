@@ -43,7 +43,7 @@ export default {
           temp[obj.foodName] = obj
         } else {
           temp[obj.foodName].currentAmount += obj.currentAmount
-          temp[obj.foodName].maxiumumCapacity += obj.maximumCapacity
+          temp[obj.foodName].maximumCapacity += obj.maximumCapacity
         }
       }
 
