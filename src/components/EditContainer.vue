@@ -9,16 +9,17 @@
             <tr>
                 <th>Update Frequency:</th>
                 <td>
-                    <select id="inputUpdateFrequency" v-model.number="getContainerUpdateFrequencey">
-                        <option value="5">5minutes</option>
-                        <option value="10">10minutes</option>
-                        <option value="30">30minutes</option>
-                        <option value="60">60minutes</option>
-                        <option value="120">2hours</option>
-                        <option value="240">4hours</option>
-                        <option value="360">6hours</option>
-                        <option value="720">12hours</option>
-                        <option value="1440">24hours</option>
+                    <select id="inputUpdateFrequency" v-model.number="getContainerUpdateFrequency">
+                        <option value="1">1 minute</option>
+                        <option value="5">5 minutes</option>
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="60">60 minutes</option>
+                        <option value="120">2 hours</option>
+                        <option value="240">4 hours</option>
+                        <option value="360">6 hours</option>
+                        <option value="720">12 hours</option>
+                        <option value="1440">24 hours</option>
                     </select>
                 </td>
                 <td><button type="button" class="btn btn-primary" @click="updateUpdateFrequency">Submit</button></td>
@@ -111,7 +112,7 @@ export default {
                 return 0
             }
         },
-        getContainerUpdateFrequencey: function() {
+        getContainerUpdateFrequency: function() {
             if (this.currentContainer !== null) {
                 return this.currentContainer.updateFrequency
             } else {
