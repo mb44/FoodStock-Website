@@ -35,13 +35,13 @@
                 <td><button type="button" class="btn btn-primary" @click="updateFoodName">Submit</button></td>
             </tr>
             <tr>
-                <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainer')">Update</button></td>
+                <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainerWeight')">Update</button></td>
             </tr>
             <tr>
-                <th>Max Capacity:</th><td>{{ getMaxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maxCapacity')">Update</button></td>
+                <th>Max Capacity:</th><td>{{ getMaxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maximumCapacity')">Update</button></td>
             </tr>
             <tr>
-                <th>Current Amount:</th><td>{{ getCurrentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('measure')">Update</button></td>
+                <th>Current Amount:</th><td>{{ getCurrentAmount }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('currentAmount')">Update</button></td>
             </tr>
             <tr>
                 <th>Container State:</th><td colspan="2">{{ getContainerState }}</td>
@@ -135,7 +135,7 @@ export default {
         },
         getMaxCapacity: function() {
             if (this.currentContainer !== null) {
-                return this.currentContainer.maxCapacity
+                return this.currentContainer.maximumCapacity
             } else {
                 return 0
             }
