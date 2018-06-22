@@ -142,6 +142,9 @@ class FirebaseDatabase extends Database {
                 var item = childSnapshot.val();
                 item.key = childSnapshot.key;
                 console.log(item)
+                containerItems.currentAmount = containerItems.currentAmount.toFixed(3)
+                containerItems.emptyContainerWeight = containerItems.emptyContainerWeight.toFixed(3)
+                containerItems.maximumCapacity = containerItems.maximumCapacity.toFixed(3)
                 store.containers.containerItems.push(item);
             });
         }, function (errorObject) {
