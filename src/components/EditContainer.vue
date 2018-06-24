@@ -39,7 +39,7 @@
                 <th>Empty Container Weight:</th><td>{{ getEmptyContainerWeight.toFixed(3) }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('emptyContainerWeight')">Update</button></td>
             </tr>
             <tr>
-                <th>Max Capacity:</th><td>{{ getMaxCapacity }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maximumCapacity')">Update</button></td>
+                <th>Max Capacity:</th><td>{{ getMaxCapacity.toFixed(3) }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('maximumCapacity')">Update</button></td>
             </tr>
             <tr>
                 <th>Current Amount:</th><td>{{  getCurrentAmount.toFixed(3) }}kg</td><td><button type="button" class="btn btn-warning" @click="setContainerState('currentAmount')">Update</button></td>
