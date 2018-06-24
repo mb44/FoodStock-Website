@@ -20,8 +20,14 @@
 </template>
 
 <script>
+import Header from './components/Header.vue'
+import AuthStatus from './components/AuthStatus.vue'
 
 export default {
+  components: {
+    fmHeader: Header,
+    fmAuthStatus: AuthStatus
+  },
   computed: {
     getCurrentUser() {
       return this.$store.getters.getCurrentUser
