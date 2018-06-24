@@ -1,6 +1,6 @@
 # foodstockmonitor
 
-> A website for monitoring kitchen food stock
+> A website for monitoring kitchen food supply
 
 ## Build Setup
 
