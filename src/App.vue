@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <div class="container-fluid">
       <div class="row">
         <fm-header></fm-header>
