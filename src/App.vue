@@ -20,28 +20,8 @@
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
-import Login from './components/Login.vue'
-import AuthStatus from './components/AuthStatus.vue'
-import Home from './components/Home.vue'
-import ListContainers from './components/ListContainers.vue'
-import ListFoodTypes from './components/ListFoodTypes.vue'
-import ListUsers from './components/ListUsers.vue'
-import EditContainer from './components/EditContainer.vue'
 
 export default {
-  components: {
-    fmHeader: Header,
-    fmFooter: Footer,
-    fmHome: Home,
-    fmLogin: Login,
-    fmAuthStatus: AuthStatus,
-    fmListContainers: ListContainers,
-    fmEditContainer: EditContainer,
-    fmListFoodTypes: ListFoodTypes,
-    fmListUsers: ListUsers
-  },
   computed: {
     getCurrentUser() {
       return this.$store.getters.getCurrentUser
